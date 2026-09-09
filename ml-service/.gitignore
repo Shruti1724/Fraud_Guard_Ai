@@ -1,0 +1,10 @@
+# Virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Data files (too large / regenerable)
+data/*.csv
+
+# OS junk
+.DS_Store
