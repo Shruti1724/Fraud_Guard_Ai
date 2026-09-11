@@ -131,8 +131,8 @@ Stores complete forensic dossiers produced by LangGraph:
 
 ## 4. WHERE Everything is Configured (Single Source of Truth)
 
-- **MongoDB Atlas URI**: `backend/.env` (`MONGODB_URI=mongodb+srv://kosada:kosada%4023@cluster0.tn6jbk5.mongodb.net/fraudguard_db`)
-- **FastAPI Python URL**: `backend/.env` (`AGENT_SERVICE_URL=http://127.0.0.1:8001`)
+- **MongoDB Atlas URI**: `backend/.env` (``)
+- **FastAPI Python URL**: `backend/.env`
 - **Risk Thresholds**: `shared/contracts/schemas.py`:
   - `RISK_FLAG_THRESHOLD = 0.85` (Auto-block + triggers investigation)
   - `RISK_WARNING_THRESHOLD = 0.70` (Displays mobile warning banner)
