@@ -1,6 +1,6 @@
 
 
-### 1. Start Shruti's service first
+### 1. Start Agent service first
 ```bash
 cd agent-service
 ollama run llama3.2:latest &   # if not already running
