@@ -44,15 +44,3 @@ Confirming a flagged payment ("Send anyway") writes to `transactions`,
 so the dashboard (whoever builds Cytoscape.js next) has real events to render
 from day one.
 
-## What's NOT done yet (be upfront about this in the review)
-
-- No dashboard/graph view (Cytoscape.js) — Socket.IO events exist, nothing
-  consumes them visually yet.
-- `/send-money` re-calls `/predict` server-side for safety, which means every
-  confirmed payment makes 2 calls to agent-service — fine for a demo, worth
-  flagging as a thing to optimize later.
-- No auth — `sender_account_id` is hardcoded to the single demo account.
-- Not integration-tested against a real MongoDB instance yet (built and
-  syntax-checked, but I don't have a Mongo instance in this environment to
-  run it against) — test this yourself against your Atlas cluster before the
-  review.
