@@ -6,6 +6,11 @@ Used by Member B (ML/GNN Pipeline) and Member C (Agent Service)
 from typing import Optional, List, Dict, Any, Literal
 from pydantic import BaseModel, Field
 
+# --- Standard Threshold Constants ---
+RISK_FLAG_THRESHOLD: float = 0.85     # Triggers autonomous investigation & auto_block
+RISK_WARNING_THRESHOLD: float = 0.70  # Displays UI cautionary warning to user
+RISK_LOW_CEILING: float = 0.30        # Instant pass-through for verified accounts
+
 # --- Layer 1: /predict ---
 
 class PredictRequest(BaseModel):
