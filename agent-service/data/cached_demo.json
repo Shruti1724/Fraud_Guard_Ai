@@ -1,0 +1,26 @@
+{
+  "acc_mule_chain_01": {
+    "account_id": "acc_mule_chain_01",
+    "decision": "auto_block",
+    "action_taken": "UPI ID 'mule.relay99@oksbi' revoked; Account immediately frozen on NPCI switch; High-risk beneficiary blacklisted.",
+    "report": "FraudGuard AI Investigation Report:\n- Risk Assessment: CRITICAL (Suspicion Score: 95/100)\n- Topology Detected: Mule-Chain Layering Ring (Rapid pass-through of INR 97,000 from multiple newly flagged victim accounts to aggregator sink within 6 minutes).\n- KYC & Account Health: New account (4 days old), minimal OTP verification, near-zero retention balance (INR 120).\n- Mitigation Action: Immediate automated debit freeze executed, NPCI central blacklist update dispatched."
+  },
+  "acc_star_burst_02": {
+    "account_id": "acc_star_burst_02",
+    "decision": "auto_block",
+    "action_taken": "UPI transactions suspended; Outflow channels blocked; Device ID 'DEV_EMULATOR_881' blacklisted across network.",
+    "report": "FraudGuard AI Investigation Report:\n- Risk Assessment: HIGH (Suspicion Score: 88/100)\n- Topology Detected: Star-Burst Smurfing (Lump-sum INR 100,000 dispersed immediately into structured micro-payments of INR 9,900 across multiple leaf wallets).\n- Device Risk: Known mobile emulator fingerprint and suspicious proxy subnet detected.\n- Mitigation Action: All outbound payment gateways locked pending law enforcement KYC re-verification."
+  },
+  "acc_suspicious_device_04": {
+    "account_id": "acc_suspicious_device_04",
+    "decision": "escalate",
+    "action_taken": "Transaction placed on 30-minute hold; Mandatory biometric 2FA step-up challenge sent to registered phone number; Compliance ticket #ESC-9082 generated.",
+    "report": "FraudGuard AI Investigation Report:\n- Risk Assessment: MEDIUM-HIGH (Suspicion Score: 74/100)\n- Anomaly: Severe behavioral deviation (Account age 580 days, avg ticket INR 1,250 suddenly attempting 2x INR 90k+ transfers at 03:14 AM via Tor exit IP).\n- Mitigation Action: Stepped-up verification challenge issued to genuine account holder before funds release."
+  },
+  "acc_legit_retail_03": {
+    "account_id": "acc_legit_retail_03",
+    "decision": "clear",
+    "action_taken": "No restrictive action taken; Normal UPI operations continued; Account marked healthy.",
+    "report": "FraudGuard AI Investigation Report:\n- Risk Assessment: LOW (Suspicion Score: 8/100)\n- Pattern: Legitimate retail micro-merchant behavior (Consistent low-value incoming P2M UPI transactions, fully biometric KYC verified, 820+ days history).\n- Mitigation Action: Zero restrictions applied."
+  }
+}

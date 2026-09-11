@@ -1,0 +1,260 @@
+{
+  "acc_mule_chain_01": {
+    "account_id": "acc_mule_chain_01",
+    "vpa_address": "mule.relay99@oksbi",
+    "account_age_days": 4,
+    "avg_tx_amount": 48500.0,
+    "tx_frequency_per_day": 38.5,
+    "unique_counterparties": 14,
+    "device_id": "DEV_ANDROID_9921_MULE",
+    "ip_address": "103.21.144.12",
+    "kyc_status": "PARTIAL_MINIMUM_OTP",
+    "current_balance": 120.0,
+    "recent_transactions": [
+      {
+        "step": 101,
+        "type": "PAYMENT",
+        "amount": 49000.0,
+        "nameOrig": "C_VICTIM_881",
+        "nameDest": "acc_mule_chain_01",
+        "timestamp": "2026-09-11T09:12:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 102,
+        "type": "PAYMENT",
+        "amount": 48000.0,
+        "nameOrig": "C_VICTIM_902",
+        "nameDest": "acc_mule_chain_01",
+        "timestamp": "2026-09-11T09:14:30Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 103,
+        "type": "TRANSFER",
+        "amount": 96800.0,
+        "nameOrig": "acc_mule_chain_01",
+        "nameDest": "acc_aggregator_sink_09",
+        "timestamp": "2026-09-11T09:18:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "C_VICTIM_881",
+        "relation": "inflow",
+        "total_volume": 49000.0,
+        "tx_count": 1,
+        "risk_label": "VICTIM_FLAGGED"
+      },
+      {
+        "neighbor_id": "C_VICTIM_902",
+        "relation": "inflow",
+        "total_volume": 48000.0,
+        "tx_count": 1,
+        "risk_label": "VICTIM_FLAGGED"
+      },
+      {
+        "neighbor_id": "acc_aggregator_sink_09",
+        "relation": "outflow",
+        "total_volume": 96800.0,
+        "tx_count": 1,
+        "risk_label": "HIGH_RISK_SINK"
+      },
+      {
+        "neighbor_id": "DEV_ANDROID_9921_MULE",
+        "relation": "shared_device",
+        "total_volume": 350000.0,
+        "tx_count": 8,
+        "risk_label": "MULE_CLUSTER"
+      }
+    ]
+  },
+  "acc_star_burst_02": {
+    "account_id": "acc_star_burst_02",
+    "vpa_address": "quicksplit.hub@paytm",
+    "account_age_days": 12,
+    "avg_tx_amount": 9800.0,
+    "tx_frequency_per_day": 45.0,
+    "unique_counterparties": 18,
+    "device_id": "DEV_EMULATOR_881",
+    "ip_address": "45.112.55.90",
+    "kyc_status": "MINIMUM_KYC",
+    "current_balance": 450.0,
+    "recent_transactions": [
+      {
+        "step": 201,
+        "type": "TRANSFER",
+        "amount": 100000.0,
+        "nameOrig": "acc_source_syndicate",
+        "nameDest": "acc_star_burst_02",
+        "timestamp": "2026-09-11T10:00:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 202,
+        "type": "PAYMENT",
+        "amount": 9900.0,
+        "nameOrig": "acc_star_burst_02",
+        "nameDest": "acc_leaf_node_01",
+        "timestamp": "2026-09-11T10:02:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 203,
+        "type": "PAYMENT",
+        "amount": 9900.0,
+        "nameOrig": "acc_star_burst_02",
+        "nameDest": "acc_leaf_node_02",
+        "timestamp": "2026-09-11T10:03:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 204,
+        "type": "PAYMENT",
+        "amount": 9900.0,
+        "nameOrig": "acc_star_burst_02",
+        "nameDest": "acc_leaf_node_03",
+        "timestamp": "2026-09-11T10:04:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 205,
+        "type": "PAYMENT",
+        "amount": 9900.0,
+        "nameOrig": "acc_star_burst_02",
+        "nameDest": "acc_leaf_node_04",
+        "timestamp": "2026-09-11T10:05:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "acc_source_syndicate",
+        "relation": "inflow",
+        "total_volume": 100000.0,
+        "tx_count": 1,
+        "risk_label": "SYNDICATE_ROOT"
+      },
+      {
+        "neighbor_id": "acc_leaf_node_01",
+        "relation": "outflow",
+        "total_volume": 9900.0,
+        "tx_count": 1,
+        "risk_label": "LEAF_MULE"
+      },
+      {
+        "neighbor_id": "acc_leaf_node_02",
+        "relation": "outflow",
+        "total_volume": 9900.0,
+        "tx_count": 1,
+        "risk_label": "LEAF_MULE"
+      }
+    ]
+  },
+  "acc_suspicious_device_04": {
+    "account_id": "acc_suspicious_device_04",
+    "vpa_address": "rajesh.kumar77@icici",
+    "account_age_days": 580,
+    "avg_tx_amount": 1250.0,
+    "tx_frequency_per_day": 1.5,
+    "unique_counterparties": 22,
+    "device_id": "DEV_UNKNOWN_NEW_LINUX",
+    "ip_address": "185.220.101.5",
+    "kyc_status": "FULL_BIOMETRIC_VERIFIED",
+    "current_balance": 15000.0,
+    "recent_transactions": [
+      {
+        "step": 301,
+        "type": "PAYMENT",
+        "amount": 95000.0,
+        "nameOrig": "acc_suspicious_device_04",
+        "nameDest": "acc_crypto_p2p_desk",
+        "timestamp": "2026-09-11T03:14:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 302,
+        "type": "PAYMENT",
+        "amount": 90000.0,
+        "nameOrig": "acc_suspicious_device_04",
+        "nameDest": "acc_overseas_remit",
+        "timestamp": "2026-09-11T03:22:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "acc_crypto_p2p_desk",
+        "relation": "outflow",
+        "total_volume": 95000.0,
+        "tx_count": 1,
+        "risk_label": "UNREGISTERED_CRYPTO"
+      },
+      {
+        "neighbor_id": "DEV_UNKNOWN_NEW_LINUX",
+        "relation": "shared_device",
+        "total_volume": 185000.0,
+        "tx_count": 2,
+        "risk_label": "TOR_EXIT_NODE_IP"
+      }
+    ]
+  },
+  "acc_legit_retail_03": {
+    "account_id": "acc_legit_retail_03",
+    "vpa_address": "sharma.kirana.store@hdfcbank",
+    "account_age_days": 820,
+    "avg_tx_amount": 340.0,
+    "tx_frequency_per_day": 45.0,
+    "unique_counterparties": 190,
+    "device_id": "DEV_POS_TERMINAL_22",
+    "ip_address": "122.161.44.89",
+    "kyc_status": "FULL_BIOMETRIC_VERIFIED",
+    "current_balance": 45200.0,
+    "recent_transactions": [
+      {
+        "step": 401,
+        "type": "PAYMENT",
+        "amount": 250.0,
+        "nameOrig": "C_CUSTOMER_01",
+        "nameDest": "acc_legit_retail_03",
+        "timestamp": "2026-09-11T10:15:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 402,
+        "type": "PAYMENT",
+        "amount": 540.0,
+        "nameOrig": "C_CUSTOMER_02",
+        "nameDest": "acc_legit_retail_03",
+        "timestamp": "2026-09-11T10:18:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 403,
+        "type": "PAYMENT",
+        "amount": 120.0,
+        "nameOrig": "C_CUSTOMER_03",
+        "nameDest": "acc_legit_retail_03",
+        "timestamp": "2026-09-11T10:22:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "C_CUSTOMER_01",
+        "relation": "inflow",
+        "total_volume": 250.0,
+        "tx_count": 1,
+        "risk_label": "BENIGN"
+      },
+      {
+        "neighbor_id": "C_CUSTOMER_02",
+        "relation": "inflow",
+        "total_volume": 540.0,
+        "tx_count": 1,
+        "risk_label": "BENIGN"
+      }
+    ]
+  }
+}
