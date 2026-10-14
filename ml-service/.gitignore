@@ -8,3 +8,9 @@ data/*.csv
 
 # OS junk
 .DS_Store
+# Generated datasets and large prediction dumps
+/data/
+/results/v2/oof_predictions.csv
+
+# Local backup files
+*.bak

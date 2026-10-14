@@ -1,0 +1,2808 @@
+{
+  "runs": [
+    {
+      "experiment": "sage_edge_L2",
+      "model": "sage_edge_L2",
+      "fold": 0,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 449.02827310562134,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9946130556551241,
+      "pr_auc": 0.8150499853640044,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3992824192721681,
+        "recall": 0.8867387592487194,
+        "f1": 0.5506273193143665,
+        "fpr": 0.013248401883262588,
+        "confusion_matrix": {
+          "tn": 174583,
+          "fp": 2344,
+          "fn": 199,
+          "tp": 1558
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8767526745796204,
+        "recall": 0.8736482640865111,
+        "fpr": 0.010004125995467057
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 0.975609756097561,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9672131147540983,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.03257328990228013,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.04310344827586207,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.5102040816326531,
+        "caught": 5,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.1111111111111111,
+        "caught": 0,
+        "total": 8
+      },
+      "ordinary_fpr": 0.012990326714371577
+    },
+    {
+      "experiment": "sage_edge_L3",
+      "model": "sage_edge_L3",
+      "fold": 0,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 354.7458770275116,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 3,
+      "auc_roc": 0.9948014599553532,
+      "pr_auc": 0.8206921412442505,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3887800097991181,
+        "recall": 0.9032441661923734,
+        "f1": 0.5435862305189245,
+        "fpr": 0.014101861219599044,
+        "confusion_matrix": {
+          "tn": 174432,
+          "fp": 2495,
+          "fn": 170,
+          "tp": 1587
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8814972639083862,
+        "recall": 0.883892999430848,
+        "fpr": 0.010004125995467057
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.026058631921824105,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.04310344827586207,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.46938775510204084,
+        "caught": 5,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.08333333333333333,
+        "caught": 0,
+        "total": 8
+      },
+      "ordinary_fpr": 0.013874871003957769
+    },
+    {
+      "experiment": "gat_edge_L2",
+      "model": "gat_edge_L2",
+      "fold": 0,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 630.0060029029846,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9736840794810051,
+      "pr_auc": 0.48759453538376635,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3978702807357212,
+        "recall": 0.7017643710870802,
+        "f1": 0.5078253706754531,
+        "fpr": 0.010546722659627982,
+        "confusion_matrix": {
+          "tn": 175061,
+          "fp": 1866,
+          "fn": 524,
+          "tp": 1233
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.857572078704834,
+        "recall": 0.6937962435970404,
+        "fpr": 0.010004125995467057
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 0.9512195121951219,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9672131147540983,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.019543973941368076,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.0,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.3673469387755102,
+        "caught": 4,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.027777777777777776,
+        "caught": 0,
+        "total": 8
+      },
+      "ordinary_fpr": 0.010279992288588245
+    },
+    {
+      "experiment": "gat_edge_L3",
+      "model": "gat_edge_L3",
+      "fold": 0,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 737.5325331687927,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 3,
+      "auc_roc": 0.9661840168886686,
+      "pr_auc": 0.3515680708562875,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3171484703901207,
+        "recall": 0.64314171883893,
+        "f1": 0.424812030075188,
+        "fpr": 0.013751434207328446,
+        "confusion_matrix": {
+          "tn": 174494,
+          "fp": 2433,
+          "fn": 627,
+          "tp": 1130
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.9011329412460327,
+        "recall": 0.5594763801935116,
+        "fpr": 0.010004125995467057
+      },
+      "ring_chain": {
+        "account_rate": 0.9714285714285714,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 0.9615384615384616,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 0.9024390243902439,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9508196721311475,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.0,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.0,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.32653061224489793,
+        "caught": 3,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.0,
+        "caught": 0,
+        "total": 8
+      },
+      "ordinary_fpr": 0.01348930041618943
+    },
+    {
+      "experiment": "sage_noedge",
+      "model": "sage_noedge",
+      "fold": 0,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 216.2235541343689,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.988073255851071,
+      "pr_auc": 0.7374597626111755,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3081180811808118,
+        "recall": 0.8554354012521344,
+        "f1": 0.453051996985682,
+        "fpr": 0.019075663974407523,
+        "confusion_matrix": {
+          "tn": 173552,
+          "fp": 3375,
+          "fn": 254,
+          "tp": 1503
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.9176226258277893,
+        "recall": 0.7962435970404098,
+        "fpr": 0.010004125995467057
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.03257328990228013,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.04310344827586207,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.5102040816326531,
+        "caught": 5,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.19444444444444445,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.01878522584230163
+    },
+    {
+      "experiment": "sage_edge_L2",
+      "model": "sage_edge_L2",
+      "fold": 1,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 273.8811640739441,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9947125337975905,
+      "pr_auc": 0.8287898931129869,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.34703672787979967,
+        "recall": 0.9157488986784141,
+        "f1": 0.5033292978208233,
+        "fpr": 0.017694460938162695,
+        "confusion_matrix": {
+          "tn": 173706,
+          "fp": 3129,
+          "fn": 153,
+          "tp": 1663
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.9096187949180603,
+        "recall": 0.876101321585903,
+        "fpr": 0.010003675742924194
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 0.9743589743589743,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.037162162162162164,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.050505050505050504,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.49056603773584906,
+        "caught": 3,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.1388888888888889,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.017436781739594086
+    },
+    {
+      "experiment": "sage_edge_L3",
+      "model": "sage_edge_L3",
+      "fold": 1,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 420.3674268722534,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 3,
+      "auc_roc": 0.9948954412442272,
+      "pr_auc": 0.8348631555054831,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3968833698563428,
+        "recall": 0.8975770925110133,
+        "f1": 0.5503967583994598,
+        "fpr": 0.014007408035739532,
+        "confusion_matrix": {
+          "tn": 174358,
+          "fp": 2477,
+          "fn": 186,
+          "tp": 1630
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8789804577827454,
+        "recall": 0.875,
+        "fpr": 0.010003675742924194
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.04054054054054054,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.0707070707070707,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.4716981132075472,
+        "caught": 3,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.16666666666666666,
+        "caught": 2,
+        "total": 8
+      },
+      "ordinary_fpr": 0.013710052525894245
+    },
+    {
+      "experiment": "gat_edge_L2",
+      "model": "gat_edge_L2",
+      "fold": 1,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 466.65511679649353,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9731341805603148,
+      "pr_auc": 0.4745236106141371,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.4162695711368278,
+        "recall": 0.6734581497797357,
+        "f1": 0.5145140933950357,
+        "fpr": 0.009698306330760314,
+        "confusion_matrix": {
+          "tn": 175120,
+          "fp": 1715,
+          "fn": 593,
+          "tp": 1223
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8452527523040771,
+        "recall": 0.6784140969162996,
+        "fpr": 0.010003675742924194
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 0.9743589743589743,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9814814814814815,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.033783783783783786,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.10101010101010101,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.22641509433962265,
+        "caught": 2,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.2222222222222222,
+        "caught": 0,
+        "total": 8
+      },
+      "ordinary_fpr": 0.009319659205645115
+    },
+    {
+      "experiment": "gat_edge_L3",
+      "model": "gat_edge_L3",
+      "fold": 1,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 394.42379808425903,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 3,
+      "auc_roc": 0.962644664648558,
+      "pr_auc": 0.37622432966233016,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3186571271326362,
+        "recall": 0.6376651982378855,
+        "f1": 0.42495412844036695,
+        "fpr": 0.014001753046625385,
+        "confusion_matrix": {
+          "tn": 174359,
+          "fp": 2476,
+          "fn": 658,
+          "tp": 1158
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8887109160423279,
+        "recall": 0.5633259911894273,
+        "fpr": 0.010003675742924194
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 0.8571428571428571,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9814814814814815,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.006756756756756757,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.0,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.2830188679245283,
+        "caught": 4,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.3055555555555556,
+        "caught": 2,
+        "total": 8
+      },
+      "ordinary_fpr": 0.01365332909798405
+    },
+    {
+      "experiment": "sage_noedge",
+      "model": "sage_noedge",
+      "fold": 1,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 233.01564502716064,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9885357458214425,
+      "pr_auc": 0.7614128817220739,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.31565147236789026,
+        "recall": 0.861784140969163,
+        "f1": 0.46206082078535576,
+        "fpr": 0.019187378064297225,
+        "confusion_matrix": {
+          "tn": 173442,
+          "fp": 3393,
+          "fn": 251,
+          "tp": 1565
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.9151952266693115,
+        "recall": 0.7946035242290749,
+        "fpr": 0.010003675742924194
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 0.9743589743589743,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.030405405405405407,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.010101010101010102,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.20754716981132076,
+        "caught": 1,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.1388888888888889,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.019030710063870578
+    },
+    {
+      "experiment": "sage_edge_L2",
+      "model": "sage_edge_L2",
+      "fold": 2,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 287.5509660243988,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9946522279379757,
+      "pr_auc": 0.8140814103427282,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.4053039779834876,
+        "recall": 0.8881578947368421,
+        "f1": 0.5566053942621543,
+        "fpr": 0.01344715612730955,
+        "confusion_matrix": {
+          "tn": 174389,
+          "fp": 2377,
+          "fn": 204,
+          "tp": 1620
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8809807300567627,
+        "recall": 0.8689692982456141,
+        "fpr": 0.010001923446816696
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.028985507246376812,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.058823529411764705,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.39622641509433965,
+        "caught": 5,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.17647058823529413,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.01320081462697913
+    },
+    {
+      "experiment": "sage_edge_L3",
+      "model": "sage_edge_L3",
+      "fold": 2,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 428.06086921691895,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 3,
+      "auc_roc": 0.9951879650686972,
+      "pr_auc": 0.8245306122840999,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3743291592128801,
+        "recall": 0.9177631578947368,
+        "f1": 0.5317662007623888,
+        "fpr": 0.01582883586210018,
+        "confusion_matrix": {
+          "tn": 173968,
+          "fp": 2798,
+          "fn": 150,
+          "tp": 1674
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8909139633178711,
+        "recall": 0.8777412280701754,
+        "fpr": 0.010001923446816696
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.014492753623188406,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.08823529411764706,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.37735849056603776,
+        "caught": 4,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.08823529411764706,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.01562313858302558
+    },
+    {
+      "experiment": "gat_edge_L2",
+      "model": "gat_edge_L2",
+      "fold": 2,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 192.21910309791565,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9666849914551521,
+      "pr_auc": 0.4232043542272924,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3003898188488879,
+        "recall": 0.7182017543859649,
+        "f1": 0.423605497170574,
+        "fpr": 0.017260106581582432,
+        "confusion_matrix": {
+          "tn": 173715,
+          "fp": 3051,
+          "fn": 514,
+          "tp": 1310
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.9092186689376831,
+        "recall": 0.5981359649122807,
+        "fpr": 0.010001923446816696
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 0.96,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 0.975609756097561,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.018115942028985508,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.10294117647058823,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.3584905660377358,
+        "caught": 3,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.4411764705882353,
+        "caught": 5,
+        "total": 8
+      },
+      "ordinary_fpr": 0.016927903243191114
+    },
+    {
+      "experiment": "gat_edge_L3",
+      "model": "gat_edge_L3",
+      "fold": 2,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 439.0658028125763,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 3,
+      "auc_roc": 0.9682003617975672,
+      "pr_auc": 0.3597394508267796,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3121054076310733,
+        "recall": 0.6233552631578947,
+        "f1": 0.41595024693616245,
+        "fpr": 0.014176934478349909,
+        "confusion_matrix": {
+          "tn": 174260,
+          "fp": 2506,
+          "fn": 687,
+          "tp": 1137
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8904100060462952,
+        "recall": 0.5290570175438597,
+        "fpr": 0.010001923446816696
+      },
+      "ring_chain": {
+        "account_rate": 0.9705882352941176,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 0.9285714285714286,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 0.9512195121951219,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9565217391304348,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.0036231884057971015,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.0,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.24528301886792453,
+        "caught": 4,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.08823529411764706,
+        "caught": 0,
+        "total": 8
+      },
+      "ordinary_fpr": 0.013943963194290804
+    },
+    {
+      "experiment": "sage_noedge",
+      "model": "sage_noedge",
+      "fold": 2,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 213.08094835281372,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9891241606506849,
+      "pr_auc": 0.7424861197598528,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3283992387396913,
+        "recall": 0.8514254385964912,
+        "f1": 0.47398138257286737,
+        "fpr": 0.017967256146544017,
+        "confusion_matrix": {
+          "tn": 173590,
+          "fp": 3176,
+          "fn": 271,
+          "tp": 1553
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.9162605404853821,
+        "recall": 0.7779605263157895,
+        "fpr": 0.010001923446816696
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9347826086956522,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.043478260869565216,
+        "caught": 1,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.029411764705882353,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.3018867924528302,
+        "caught": 4,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.17647058823529413,
+        "caught": 2,
+        "total": 8
+      },
+      "ordinary_fpr": 0.01775047226807808
+    },
+    {
+      "experiment": "sage_edge_L2",
+      "model": "sage_edge_L2",
+      "fold": 3,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 386.0311839580536,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.995044058883687,
+      "pr_auc": 0.8281178299724284,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.38486386709736964,
+        "recall": 0.9179966978536048,
+        "f1": 0.5423508372622338,
+        "fpr": 0.015075348468998275,
+        "confusion_matrix": {
+          "tn": 174179,
+          "fp": 2666,
+          "fn": 149,
+          "tp": 1668
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8873521089553833,
+        "recall": 0.8860759493670886,
+        "fpr": 0.010003110068138766
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9615384615384616,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.05379746835443038,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.12222222222222222,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.28,
+        "caught": 2,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.13157894736842105,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.014838680401143532
+    },
+    {
+      "experiment": "sage_edge_L3",
+      "model": "sage_edge_L3",
+      "fold": 3,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 406.39658403396606,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 3,
+      "auc_roc": 0.9953360212567018,
+      "pr_auc": 0.8360210053508803,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.36301075268817207,
+        "recall": 0.9290038525041276,
+        "f1": 0.5220349466522344,
+        "fpr": 0.01674913059458848,
+        "confusion_matrix": {
+          "tn": 173883,
+          "fp": 2962,
+          "fn": 129,
+          "tp": 1688
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.9064566493034363,
+        "recall": 0.8910291689598239,
+        "fpr": 0.010003110068138766
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9807692307692307,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.05063291139240506,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.1111111111111111,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.32,
+        "caught": 3,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.18421052631578946,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.01649498570585833
+    },
+    {
+      "experiment": "gat_edge_L2",
+      "model": "gat_edge_L2",
+      "fold": 3,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 285.0761671066284,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9797403996388543,
+      "pr_auc": 0.5030791124217223,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.38248048568950566,
+        "recall": 0.7281232801320858,
+        "f1": 0.5015163002274451,
+        "fpr": 0.012078373717096892,
+        "confusion_matrix": {
+          "tn": 174709,
+          "fp": 2136,
+          "fn": 494,
+          "tp": 1323
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.876180112361908,
+        "recall": 0.6956521739130435,
+        "fpr": 0.010003110068138766
+      },
+      "ring_chain": {
+        "account_rate": 0.9487179487179487,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 0.8571428571428571,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 0.9743589743589743,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9423076923076923,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.02531645569620253,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.1,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.3,
+        "caught": 2,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.34210526315789475,
+        "caught": 3,
+        "total": 8
+      },
+      "ordinary_fpr": 0.0117529609293461
+    },
+    {
+      "experiment": "gat_edge_L3",
+      "model": "gat_edge_L3",
+      "fold": 3,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 338.2658338546753,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 3,
+      "auc_roc": 0.9644440911529587,
+      "pr_auc": 0.3841831515078791,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3120624663435649,
+        "recall": 0.6378646119977985,
+        "f1": 0.4190923883565359,
+        "fpr": 0.014447680171901948,
+        "confusion_matrix": {
+          "tn": 174290,
+          "fp": 2555,
+          "fn": 658,
+          "tp": 1159
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8914036154747009,
+        "recall": 0.5569620253164557,
+        "fpr": 0.010003110068138766
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9615384615384616,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.0031645569620253164,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.0,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.46,
+        "caught": 5,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.3684210526315789,
+        "caught": 4,
+        "total": 8
+      },
+      "ordinary_fpr": 0.014084267368516586
+    },
+    {
+      "experiment": "sage_noedge",
+      "model": "sage_noedge",
+      "fold": 3,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 1361.0333409309387,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9894176784476479,
+      "pr_auc": 0.7580218733360047,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.30659742258126566,
+        "recall": 0.8772702256466703,
+        "f1": 0.45438996579247437,
+        "fpr": 0.020385082982272613,
+        "confusion_matrix": {
+          "tn": 173240,
+          "fp": 3605,
+          "fn": 223,
+          "tp": 1594
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.9234942197799683,
+        "recall": 0.8084755090809026,
+        "fpr": 0.010003110068138766
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9230769230769231,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.04746835443037975,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.06666666666666667,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.3,
+        "caught": 2,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.18421052631578946,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.020181966692380995
+    },
+    {
+      "experiment": "sage_edge_L2",
+      "model": "sage_edge_L2",
+      "fold": 4,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 657.1552839279175,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9947685467875543,
+      "pr_auc": 0.8344587820739464,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.37384650011253656,
+        "recall": 0.9197120708748616,
+        "f1": 0.5316050568090894,
+        "fpr": 0.01573324737166545,
+        "confusion_matrix": {
+          "tn": 174041,
+          "fp": 2782,
+          "fn": 145,
+          "tp": 1661
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8953056335449219,
+        "recall": 0.8820598006644518,
+        "fpr": 0.010004354637122998
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.02032520325203252,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.007874015748031496,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.47058823529411764,
+        "caught": 4,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.25806451612903225,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.015535136974646929
+    },
+    {
+      "experiment": "sage_edge_L3",
+      "model": "sage_edge_L3",
+      "fold": 4,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 434.37191009521484,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 3,
+      "auc_roc": 0.9949470746343693,
+      "pr_auc": 0.8367218836484421,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3976396917148362,
+        "recall": 0.9141749723145072,
+        "f1": 0.5542128230949983,
+        "fpr": 0.014144087590415274,
+        "confusion_matrix": {
+          "tn": 174322,
+          "fp": 2501,
+          "fn": 155,
+          "tp": 1651
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.8819333910942078,
+        "recall": 0.8914728682170543,
+        "fpr": 0.010004354637122998
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.02032520325203252,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.015748031496062992,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.45098039215686275,
+        "caught": 3,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.2903225806451613,
+        "caught": 2,
+        "total": 8
+      },
+      "ordinary_fpr": 0.013924337814077477
+    },
+    {
+      "experiment": "gat_edge_L2",
+      "model": "gat_edge_L2",
+      "fold": 4,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 484.91049695014954,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9700580118505927,
+      "pr_auc": 0.5371539477616599,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.40311804008908686,
+        "recall": 0.7015503875968992,
+        "f1": 0.512022630834512,
+        "fpr": 0.010609479536033209,
+        "confusion_matrix": {
+          "tn": 174947,
+          "fp": 1876,
+          "fn": 539,
+          "tp": 1267
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.861149251461029,
+        "recall": 0.6910299003322259,
+        "fpr": 0.010004354637122998
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 0.9285714285714286,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.028455284552845527,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.0,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.29411764705882354,
+        "caught": 3,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.22580645161290322,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.01030003970279621
+    },
+    {
+      "experiment": "gat_edge_L3",
+      "model": "gat_edge_L3",
+      "fold": 4,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 403.47399282455444,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 3,
+      "auc_roc": 0.9638237257472575,
+      "pr_auc": 0.39833135469531533,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.3016983016983017,
+        "recall": 0.6688815060908084,
+        "f1": 0.41583476764199656,
+        "fpr": 0.015812422592083607,
+        "confusion_matrix": {
+          "tn": 174027,
+          "fp": 2796,
+          "fn": 598,
+          "tp": 1208
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.9025866389274597,
+        "recall": 0.5714285714285714,
+        "fpr": 0.010004354637122998
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 0.8571428571428571,
+        "caught": 6,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 0.975,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.0040650406504065045,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.0,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.4117647058823529,
+        "caught": 5,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.41935483870967744,
+        "caught": 3,
+        "total": 8
+      },
+      "ordinary_fpr": 0.015438715898133969
+    },
+    {
+      "experiment": "sage_noedge",
+      "model": "sage_noedge",
+      "fold": 4,
+      "seed": 42,
+      "epochs": 200,
+      "seconds": 194.56754875183105,
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "device_shared_count",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE",
+        "in_count",
+        "out_count",
+        "total_received",
+        "total_sent",
+        "forward_ratio",
+        "holding_time",
+        "has_holding",
+        "active_span"
+      ],
+      "edge_feature_columns": [
+        "log_amount",
+        "time_gap_in",
+        "time_gap_out",
+        "type_PAYMENT",
+        "type_TRANSFER",
+        "type_CASH_OUT",
+        "type_CASH_IN",
+        "type_DEBIT"
+      ],
+      "layers": 2,
+      "auc_roc": 0.9881015635953665,
+      "pr_auc": 0.7589022943494952,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.29979194250047286,
+        "recall": 0.8776301218161683,
+        "f1": 0.44691949809671505,
+        "fpr": 0.020936190427715853,
+        "confusion_matrix": {
+          "tn": 173121,
+          "fp": 3702,
+          "fn": 221,
+          "tp": 1585
+        }
+      },
+      "recall_at_1pct_fpr": {
+        "threshold": 0.9270290732383728,
+        "recall": 0.8023255813953488,
+        "fpr": 0.010004354637122998
+      },
+      "ring_chain": {
+        "account_rate": 1.0,
+        "caught": 8,
+        "total": 8
+      },
+      "ring_star": {
+        "account_rate": 1.0,
+        "caught": 7,
+        "total": 7
+      },
+      "ring_cycle": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_fanout": {
+        "account_rate": 1.0,
+        "caught": 5,
+        "total": 5
+      },
+      "ring_hybrid": {
+        "account_rate": 0.9821428571428571,
+        "caught": 5,
+        "total": 5
+      },
+      "decoy_merchant_hub": {
+        "account_rate": 0.04878048780487805,
+        "caught": 0,
+        "total": 12
+      },
+      "decoy_payroll_fanout": {
+        "account_rate": 0.007874015748031496,
+        "caught": 0,
+        "total": 5
+      },
+      "decoy_forward_chain": {
+        "account_rate": 0.4117647058823529,
+        "caught": 3,
+        "total": 10
+      },
+      "decoy_family_group": {
+        "account_rate": 0.22580645161290322,
+        "caught": 1,
+        "total": 8
+      },
+      "ordinary_fpr": 0.020713515966195906
+    }
+  ],
+  "controls": [],
+  "summary": [
+    {
+      "experiment": "gat_edge_L2",
+      "model": "gat_edge_L2",
+      "runs": 5,
+      "auc_roc_mean": 0.9726603325971837,
+      "auc_roc_std": 0.004333052363418685,
+      "pr_auc_mean": 0.4851111120817156,
+      "pr_auc_std": 0.037368476095493916,
+      "precision_085_mean": 0.3800256393000059,
+      "precision_085_std": 0.041263065729254124,
+      "recall_085_mean": 0.7046195885963532,
+      "recall_085_std": 0.018576901110063916,
+      "fpr_085_mean": 0.012038597765020167,
+      "fpr_085_std": 0.002720690011286949,
+      "recall_at_1pct_fpr_mean": 0.6714056759341781,
+      "recall_at_1pct_fpr_std": 0.03712656430542493,
+      "chain_caught": 40,
+      "chain_total": 40,
+      "star_caught": 35,
+      "star_total": 35,
+      "cycle_caught": 25,
+      "cycle_total": 25,
+      "fanout_caught": 25,
+      "fanout_total": 25,
+      "hybrid_caught": 25,
+      "hybrid_total": 25,
+      "merchant_hub_caught": 0,
+      "merchant_hub_total": 60,
+      "payroll_fanout_caught": 0,
+      "payroll_fanout_total": 25,
+      "forward_chain_caught": 14,
+      "forward_chain_total": 50,
+      "family_group_caught": 9,
+      "family_group_total": 40
+    },
+    {
+      "experiment": "gat_edge_L3",
+      "model": "gat_edge_L3",
+      "runs": 5,
+      "auc_roc_mean": 0.965059372047002,
+      "auc_roc_std": 0.0019425162449663047,
+      "pr_auc_mean": 0.3740092715097183,
+      "pr_auc_std": 0.016776252957167153,
+      "precision_085_mean": 0.3123343546391394,
+      "precision_085_std": 0.00593978323857767,
+      "recall_085_mean": 0.6421816596646635,
+      "recall_085_std": 0.014881344311623546,
+      "fpr_085_mean": 0.01443804489925786,
+      "fpr_085_std": 0.0007237361889346068,
+      "recall_at_1pct_fpr_mean": 0.5560499971343651,
+      "recall_at_1pct_fpr_std": 0.014357113082079544,
+      "chain_caught": 40,
+      "chain_total": 40,
+      "star_caught": 34,
+      "star_total": 35,
+      "cycle_caught": 25,
+      "cycle_total": 25,
+      "fanout_caught": 25,
+      "fanout_total": 25,
+      "hybrid_caught": 25,
+      "hybrid_total": 25,
+      "merchant_hub_caught": 0,
+      "merchant_hub_total": 60,
+      "payroll_fanout_caught": 0,
+      "payroll_fanout_total": 25,
+      "forward_chain_caught": 21,
+      "forward_chain_total": 50,
+      "family_group_caught": 9,
+      "family_group_total": 40
+    },
+    {
+      "experiment": "sage_edge_L2",
+      "model": "sage_edge_L2",
+      "runs": 5,
+      "auc_roc_mean": 0.9947580846123862,
+      "auc_roc_std": 0.00015244976329635592,
+      "pr_auc_mean": 0.8240995801732188,
+      "pr_auc_std": 0.008095891845934644,
+      "precision_085_mean": 0.3820666984690723,
+      "precision_085_std": 0.020682586176986865,
+      "recall_085_mean": 0.9056708642784883,
+      "recall_085_std": 0.014938387706807077,
+      "fpr_085_mean": 0.015039722957879711,
+      "fpr_085_std": 0.0016294158054785172,
+      "recall_at_1pct_fpr_mean": 0.8773709267899136,
+      "recall_at_1pct_fpr_std": 0.0060633395658530554,
+      "chain_caught": 40,
+      "chain_total": 40,
+      "star_caught": 35,
+      "star_total": 35,
+      "cycle_caught": 25,
+      "cycle_total": 25,
+      "fanout_caught": 25,
+      "fanout_total": 25,
+      "hybrid_caught": 25,
+      "hybrid_total": 25,
+      "merchant_hub_caught": 0,
+      "merchant_hub_total": 60,
+      "payroll_fanout_caught": 0,
+      "payroll_fanout_total": 25,
+      "forward_chain_caught": 19,
+      "forward_chain_total": 50,
+      "family_group_caught": 4,
+      "family_group_total": 40
+    },
+    {
+      "experiment": "sage_edge_L3",
+      "model": "sage_edge_L3",
+      "runs": 5,
+      "auc_roc_mean": 0.9950335924318697,
+      "auc_roc_std": 0.00019786392883770957,
+      "pr_auc_mean": 0.8305657596066311,
+      "pr_auc_std": 0.006633800172305136,
+      "precision_085_mean": 0.38412859665426985,
+      "precision_085_std": 0.013482298627164506,
+      "recall_085_mean": 0.9123526482833515,
+      "recall_085_std": 0.011055664389936604,
+      "fpr_085_mean": 0.0149662646604885,
+      "fpr_085_std": 0.001119393986657488,
+      "recall_at_1pct_fpr_mean": 0.8838272529355804,
+      "recall_at_1pct_fpr_std": 0.0067124875136605295,
+      "chain_caught": 40,
+      "chain_total": 40,
+      "star_caught": 35,
+      "star_total": 35,
+      "cycle_caught": 25,
+      "cycle_total": 25,
+      "fanout_caught": 25,
+      "fanout_total": 25,
+      "hybrid_caught": 25,
+      "hybrid_total": 25,
+      "merchant_hub_caught": 0,
+      "merchant_hub_total": 60,
+      "payroll_fanout_caught": 0,
+      "payroll_fanout_total": 25,
+      "forward_chain_caught": 18,
+      "forward_chain_total": 50,
+      "family_group_caught": 6,
+      "family_group_total": 40
+    },
+    {
+      "experiment": "sage_noedge",
+      "model": "sage_noedge",
+      "runs": 5,
+      "auc_roc_mean": 0.9886504808732426,
+      "auc_roc_std": 0.0005404863894705777,
+      "pr_auc_mean": 0.7516565863557204,
+      "pr_auc_std": 0.009734985608284749,
+      "precision_085_mean": 0.31171163147402636,
+      "precision_085_std": 0.009748295277195323,
+      "recall_085_mean": 0.8647090656561256,
+      "recall_085_std": 0.010915559686619346,
+      "fpr_085_mean": 0.019510314319047446,
+      "fpr_085_std": 0.0010461912025905616,
+      "recall_at_1pct_fpr_mean": 0.7959217476123052,
+      "recall_at_1pct_fpr_std": 0.010227930235743372,
+      "chain_caught": 40,
+      "chain_total": 40,
+      "star_caught": 35,
+      "star_total": 35,
+      "cycle_caught": 25,
+      "cycle_total": 25,
+      "fanout_caught": 25,
+      "fanout_total": 25,
+      "hybrid_caught": 25,
+      "hybrid_total": 25,
+      "merchant_hub_caught": 1,
+      "merchant_hub_total": 60,
+      "payroll_fanout_caught": 0,
+      "payroll_fanout_total": 25,
+      "forward_chain_caught": 15,
+      "forward_chain_total": 50,
+      "family_group_caught": 6,
+      "family_group_total": 40
+    }
+  ],
+  "edge_integration": "7 edge features; native GATConv and custom edge-aware MessagePassing"
+}

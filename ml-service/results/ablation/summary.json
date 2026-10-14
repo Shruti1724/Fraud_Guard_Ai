@@ -1,0 +1,3304 @@
+{
+  "runs": [
+    {
+      "experiment": "full",
+      "model": "xgboost",
+      "seed": 42,
+      "config": "full",
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE"
+      ],
+      "label_shuffle": false,
+      "seconds": 3.145716905593872,
+      "auc_roc": 0.9878142748119769,
+      "average_precision_pr_auc": 0.8879720683676452,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.7328320802005013,
+        "recall": 0.8693756194251734,
+        "f1": 0.7952855847688123,
+        "fpr": 0.006092751568912106,
+        "confusion_matrix": {
+          "tn": 260844,
+          "fp": 1599,
+          "fn": 659,
+          "tp": 4386
+        }
+      },
+      "threshold_sensitivity": {
+        "0.5": {
+          "threshold": 0.5,
+          "precision": 0.4484379590637548,
+          "recall": 0.9076313181367691,
+          "f1": 0.6002884111169376,
+          "fpr": 0.02145989795879486,
+          "confusion_matrix": {
+            "tn": 256811,
+            "fp": 5632,
+            "fn": 466,
+            "tp": 4579
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.7": {
+          "threshold": 0.7,
+          "precision": 0.5794272505457815,
+          "recall": 0.8943508424182359,
+          "f1": 0.7032418952618454,
+          "fpr": 0.012478900180229612,
+          "confusion_matrix": {
+            "tn": 259168,
+            "fp": 3275,
+            "fn": 533,
+            "tp": 4512
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.85": {
+          "threshold": 0.85,
+          "precision": 0.7328320802005013,
+          "recall": 0.8693756194251734,
+          "f1": 0.7952855847688123,
+          "fpr": 0.006092751568912106,
+          "confusion_matrix": {
+            "tn": 260844,
+            "fp": 1599,
+            "fn": 659,
+            "tp": 4386
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.95": {
+          "threshold": 0.95,
+          "precision": 0.832345971563981,
+          "recall": 0.8354806739345887,
+          "f1": 0.8339103768918785,
+          "fpr": 0.003234988168859524,
+          "confusion_matrix": {
+            "tn": 261594,
+            "fp": 849,
+            "fn": 830,
+            "tp": 4215
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        }
+      },
+      "recall_by_test_group_at_0.85": {
+        "real_paysim_fraud_accounts": 0.8773143438453713,
+        "injected_ring_accounts": 0.5692307692307692,
+        "injected_chain_accounts": 0.8115942028985508,
+        "injected_star_accounts": 0.29508196721311475
+      },
+      "ring_catch_rates": {
+        "chain": {
+          "at_least_one": {
+            "caught": 13,
+            "total": 13,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 13,
+            "total": 13,
+            "fraction": 1.0
+          }
+        },
+        "star": {
+          "at_least_one": {
+            "caught": 9,
+            "total": 9,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          }
+        },
+        "overall": {
+          "at_least_one": {
+            "caught": 22,
+            "total": 22,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 13,
+            "total": 22,
+            "fraction": 0.5909090909090909
+          }
+        }
+      },
+      "feature_importances": {
+        "account_age_days": 0.41231220960617065,
+        "current_balance": 0.019954778254032135,
+        "avg_tx_amount": 0.051931820809841156,
+        "tx_frequency_per_day": 0.01604810543358326,
+        "unique_counterparties": 0.0,
+        "kyc_status_FULL_BIOMETRIC_VERIFIED": 0.2569650411605835,
+        "kyc_status_PARTIAL_MINIMUM_OTP": 0.227151021361351,
+        "kyc_status_MINIMUM_KYC": 0.015637053176760674,
+        "kyc_status_NONE": 0.0
+      }
+    },
+    {
+      "experiment": "full",
+      "model": "graphsage",
+      "seed": 42,
+      "config": "full",
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE"
+      ],
+      "label_shuffle": false,
+      "seconds": 24.26286792755127,
+      "auc_roc": 0.9931468817088402,
+      "average_precision_pr_auc": 0.8874850032224217,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.5747126436781609,
+        "recall": 0.9018830525272548,
+        "f1": 0.7020521524456103,
+        "fpr": 0.012829452490636061,
+        "confusion_matrix": {
+          "tn": 259076,
+          "fp": 3367,
+          "fn": 495,
+          "tp": 4550
+        }
+      },
+      "threshold_sensitivity": {
+        "0.5": {
+          "threshold": 0.5,
+          "precision": 0.3410012585652356,
+          "recall": 0.9666997026759168,
+          "f1": 0.5041608518116504,
+          "fpr": 0.03591256006066079,
+          "confusion_matrix": {
+            "tn": 253018,
+            "fp": 9425,
+            "fn": 168,
+            "tp": 4877
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              }
+            }
+          }
+        },
+        "0.7": {
+          "threshold": 0.7,
+          "precision": 0.4483115417176183,
+          "recall": 0.9446977205153617,
+          "f1": 0.6080632814493493,
+          "fpr": 0.022347709788411198,
+          "confusion_matrix": {
+            "tn": 256578,
+            "fp": 5865,
+            "fn": 279,
+            "tp": 4766
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              }
+            }
+          }
+        },
+        "0.85": {
+          "threshold": 0.85,
+          "precision": 0.5747126436781609,
+          "recall": 0.9018830525272548,
+          "f1": 0.7020521524456103,
+          "fpr": 0.012829452490636061,
+          "confusion_matrix": {
+            "tn": 259076,
+            "fp": 3367,
+            "fn": 495,
+            "tp": 4550
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              }
+            }
+          }
+        },
+        "0.95": {
+          "threshold": 0.95,
+          "precision": 0.7773093841642229,
+          "recall": 0.8406342913776016,
+          "f1": 0.8077325968955338,
+          "fpr": 0.004629576708085184,
+          "confusion_matrix": {
+            "tn": 261228,
+            "fp": 1215,
+            "fn": 804,
+            "tp": 4241
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 6,
+                "total": 9,
+                "fraction": 0.6666666666666666
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 19,
+                "total": 22,
+                "fraction": 0.8636363636363636
+              }
+            }
+          }
+        }
+      },
+      "recall_by_test_group_at_0.85": {
+        "real_paysim_fraud_accounts": 0.901322482197355,
+        "injected_ring_accounts": 0.9230769230769231,
+        "injected_chain_accounts": 1.0,
+        "injected_star_accounts": 0.8360655737704918
+      },
+      "ring_catch_rates": {
+        "chain": {
+          "at_least_one": {
+            "caught": 13,
+            "total": 13,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 13,
+            "total": 13,
+            "fraction": 1.0
+          }
+        },
+        "star": {
+          "at_least_one": {
+            "caught": 9,
+            "total": 9,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 9,
+            "total": 9,
+            "fraction": 1.0
+          }
+        },
+        "overall": {
+          "at_least_one": {
+            "caught": 22,
+            "total": 22,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 22,
+            "total": 22,
+            "fraction": 1.0
+          }
+        }
+      },
+      "epochs_run": 30,
+      "best_epoch": 30,
+      "best_validation_pr_auc": 0.8917910414343742,
+      "seconds_per_epoch": 0.7811389843622843,
+      "edge_count": 1017144
+    },
+    {
+      "experiment": "no_age_kyc",
+      "model": "xgboost",
+      "seed": 42,
+      "config": "no_age_kyc",
+      "feature_columns": [
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties"
+      ],
+      "label_shuffle": false,
+      "seconds": 2.7648978233337402,
+      "auc_roc": 0.8471841295043285,
+      "average_precision_pr_auc": 0.21821074711240473,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.22420014433485685,
+        "recall": 0.3694747274529237,
+        "f1": 0.27906280410210343,
+        "fpr": 0.024576765240452214,
+        "confusion_matrix": {
+          "tn": 255993,
+          "fp": 6450,
+          "fn": 3181,
+          "tp": 1864
+        }
+      },
+      "threshold_sensitivity": {
+        "0.5": {
+          "threshold": 0.5,
+          "precision": 0.054301718913965624,
+          "recall": 0.7282457879088207,
+          "f1": 0.10106734154929578,
+          "fpr": 0.243805321536486,
+          "confusion_matrix": {
+            "tn": 198458,
+            "fp": 63985,
+            "fn": 1371,
+            "tp": 3674
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              }
+            }
+          }
+        },
+        "0.7": {
+          "threshold": 0.7,
+          "precision": 0.13975101830072859,
+          "recall": 0.48285431119920713,
+          "f1": 0.2167645488521089,
+          "fpr": 0.05713621624505131,
+          "confusion_matrix": {
+            "tn": 247448,
+            "fp": 14995,
+            "fn": 2609,
+            "tp": 2436
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.85": {
+          "threshold": 0.85,
+          "precision": 0.22420014433485685,
+          "recall": 0.3694747274529237,
+          "f1": 0.27906280410210343,
+          "fpr": 0.024576765240452214,
+          "confusion_matrix": {
+            "tn": 255993,
+            "fp": 6450,
+            "fn": 3181,
+            "tp": 1864
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.95": {
+          "threshold": 0.95,
+          "precision": 0.4464192368008364,
+          "recall": 0.1692765113974232,
+          "f1": 0.2454728370221328,
+          "fpr": 0.004035161920874247,
+          "confusion_matrix": {
+            "tn": 261384,
+            "fp": 1059,
+            "fn": 4191,
+            "tp": 854
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        }
+      },
+      "recall_by_test_group_at_0.85": {
+        "real_paysim_fraud_accounts": 0.367853509664293,
+        "injected_ring_accounts": 0.4307692307692308,
+        "injected_chain_accounts": 0.6231884057971014,
+        "injected_star_accounts": 0.21311475409836064
+      },
+      "ring_catch_rates": {
+        "chain": {
+          "at_least_one": {
+            "caught": 13,
+            "total": 13,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 13,
+            "total": 13,
+            "fraction": 1.0
+          }
+        },
+        "star": {
+          "at_least_one": {
+            "caught": 9,
+            "total": 9,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          }
+        },
+        "overall": {
+          "at_least_one": {
+            "caught": 22,
+            "total": 22,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 13,
+            "total": 22,
+            "fraction": 0.5909090909090909
+          }
+        }
+      },
+      "feature_importances": {
+        "current_balance": 0.17158915102481842,
+        "avg_tx_amount": 0.6992353200912476,
+        "tx_frequency_per_day": 0.12917549908161163,
+        "unique_counterparties": 0.0
+      }
+    },
+    {
+      "experiment": "no_age_kyc",
+      "model": "graphsage",
+      "seed": 42,
+      "config": "no_age_kyc",
+      "feature_columns": [
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties"
+      ],
+      "label_shuffle": false,
+      "seconds": 22.982604026794434,
+      "auc_roc": 0.8828694075916326,
+      "average_precision_pr_auc": 0.21788282373806744,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.27671402100061765,
+        "recall": 0.355203171456888,
+        "f1": 0.31108410728235397,
+        "fpr": 0.017847685021128396,
+        "confusion_matrix": {
+          "tn": 257759,
+          "fp": 4684,
+          "fn": 3253,
+          "tp": 1792
+        }
+      },
+      "threshold_sensitivity": {
+        "0.5": {
+          "threshold": 0.5,
+          "precision": 0.06116602843826995,
+          "recall": 0.8168483647175421,
+          "f1": 0.11380991176348748,
+          "fpr": 0.2410161444580347,
+          "confusion_matrix": {
+            "tn": 199190,
+            "fp": 63253,
+            "fn": 924,
+            "tp": 4121
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              }
+            }
+          }
+        },
+        "0.7": {
+          "threshold": 0.7,
+          "precision": 0.13295544948289578,
+          "recall": 0.5300297324083251,
+          "f1": 0.2125849664109393,
+          "fpr": 0.06644490422682259,
+          "confusion_matrix": {
+            "tn": 245005,
+            "fp": 17438,
+            "fn": 2371,
+            "tp": 2674
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              }
+            }
+          }
+        },
+        "0.85": {
+          "threshold": 0.85,
+          "precision": 0.27671402100061765,
+          "recall": 0.355203171456888,
+          "f1": 0.31108410728235397,
+          "fpr": 0.017847685021128396,
+          "confusion_matrix": {
+            "tn": 257759,
+            "fp": 4684,
+            "fn": 3253,
+            "tp": 1792
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 12,
+                "total": 13,
+                "fraction": 0.9230769230769231
+              },
+              "at_least_50_percent": {
+                "caught": 11,
+                "total": 13,
+                "fraction": 0.8461538461538461
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 6,
+                "total": 9,
+                "fraction": 0.6666666666666666
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 18,
+                "total": 22,
+                "fraction": 0.8181818181818182
+              },
+              "at_least_50_percent": {
+                "caught": 11,
+                "total": 22,
+                "fraction": 0.5
+              }
+            }
+          }
+        },
+        "0.95": {
+          "threshold": 0.95,
+          "precision": 0.42261640798226163,
+          "recall": 0.18889990089197226,
+          "f1": 0.26109589041095893,
+          "fpr": 0.004961077262491283,
+          "confusion_matrix": {
+            "tn": 261141,
+            "fp": 1302,
+            "fn": 4092,
+            "tp": 953
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 1,
+                "total": 13,
+                "fraction": 0.07692307692307693
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 1,
+                "total": 22,
+                "fraction": 0.045454545454545456
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        }
+      },
+      "recall_by_test_group_at_0.85": {
+        "real_paysim_fraud_accounts": 0.35320447609359107,
+        "injected_ring_accounts": 0.4307692307692308,
+        "injected_chain_accounts": 0.7246376811594203,
+        "injected_star_accounts": 0.09836065573770492
+      },
+      "ring_catch_rates": {
+        "chain": {
+          "at_least_one": {
+            "caught": 12,
+            "total": 13,
+            "fraction": 0.9230769230769231
+          },
+          "at_least_50_percent": {
+            "caught": 11,
+            "total": 13,
+            "fraction": 0.8461538461538461
+          }
+        },
+        "star": {
+          "at_least_one": {
+            "caught": 6,
+            "total": 9,
+            "fraction": 0.6666666666666666
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          }
+        },
+        "overall": {
+          "at_least_one": {
+            "caught": 18,
+            "total": 22,
+            "fraction": 0.8181818181818182
+          },
+          "at_least_50_percent": {
+            "caught": 11,
+            "total": 22,
+            "fraction": 0.5
+          }
+        }
+      },
+      "epochs_run": 30,
+      "best_epoch": 30,
+      "best_validation_pr_auc": 0.22040775483762004,
+      "seconds_per_epoch": 0.7404868443806966,
+      "edge_count": 1017144
+    },
+    {
+      "experiment": "no_age_kyc_balance",
+      "model": "xgboost",
+      "seed": 42,
+      "config": "no_age_kyc_balance",
+      "feature_columns": [
+        "tx_frequency_per_day",
+        "unique_counterparties"
+      ],
+      "label_shuffle": false,
+      "seconds": 1.1565179824829102,
+      "auc_roc": 0.5407200295665127,
+      "average_precision_pr_auc": 0.022410304159040613,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "confusion_matrix": {
+          "tn": 262443,
+          "fp": 0,
+          "fn": 5045,
+          "tp": 0
+        }
+      },
+      "threshold_sensitivity": {
+        "0.5": {
+          "threshold": 0.5,
+          "precision": 0.03636284076488864,
+          "recall": 0.1647175421209118,
+          "f1": 0.059574163022438884,
+          "fpr": 0.08391155412794397,
+          "confusion_matrix": {
+            "tn": 240421,
+            "fp": 22022,
+            "fn": 4214,
+            "tp": 831
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.7": {
+          "threshold": 0.7,
+          "precision": 0.052370842179759375,
+          "recall": 0.01466798810703667,
+          "f1": 0.022917311861257356,
+          "fpr": 0.005102060256893878,
+          "confusion_matrix": {
+            "tn": 261104,
+            "fp": 1339,
+            "fn": 4971,
+            "tp": 74
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 22,
+                "fraction": 0.4090909090909091
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        },
+        "0.85": {
+          "threshold": 0.85,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fpr": 0.0,
+          "confusion_matrix": {
+            "tn": 262443,
+            "fp": 0,
+            "fn": 5045,
+            "tp": 0
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        },
+        "0.95": {
+          "threshold": 0.95,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fpr": 0.0,
+          "confusion_matrix": {
+            "tn": 262443,
+            "fp": 0,
+            "fn": 5045,
+            "tp": 0
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        }
+      },
+      "recall_by_test_group_at_0.85": {
+        "real_paysim_fraud_accounts": 0.0,
+        "injected_ring_accounts": 0.0,
+        "injected_chain_accounts": 0.0,
+        "injected_star_accounts": 0.0
+      },
+      "ring_catch_rates": {
+        "chain": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 13,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 13,
+            "fraction": 0.0
+          }
+        },
+        "star": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          }
+        },
+        "overall": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 22,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 22,
+            "fraction": 0.0
+          }
+        }
+      },
+      "feature_importances": {
+        "tx_frequency_per_day": 1.0,
+        "unique_counterparties": 0.0
+      }
+    },
+    {
+      "experiment": "no_age_kyc_balance",
+      "model": "graphsage",
+      "seed": 42,
+      "config": "no_age_kyc_balance",
+      "feature_columns": [
+        "tx_frequency_per_day",
+        "unique_counterparties"
+      ],
+      "label_shuffle": false,
+      "seconds": 19.313801050186157,
+      "auc_roc": 0.5444451297286179,
+      "average_precision_pr_auc": 0.023282686043378867,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "confusion_matrix": {
+          "tn": 262443,
+          "fp": 0,
+          "fn": 5045,
+          "tp": 0
+        }
+      },
+      "threshold_sensitivity": {
+        "0.5": {
+          "threshold": 0.5,
+          "precision": 0.018860729680320914,
+          "recall": 1.0,
+          "f1": 0.03702317526015294,
+          "fpr": 0.9999961896487999,
+          "confusion_matrix": {
+            "tn": 1,
+            "fp": 262442,
+            "fn": 0,
+            "tp": 5045
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              }
+            }
+          }
+        },
+        "0.7": {
+          "threshold": 0.7,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fpr": 0.0,
+          "confusion_matrix": {
+            "tn": 262443,
+            "fp": 0,
+            "fn": 5045,
+            "tp": 0
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        },
+        "0.85": {
+          "threshold": 0.85,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fpr": 0.0,
+          "confusion_matrix": {
+            "tn": 262443,
+            "fp": 0,
+            "fn": 5045,
+            "tp": 0
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        },
+        "0.95": {
+          "threshold": 0.95,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fpr": 0.0,
+          "confusion_matrix": {
+            "tn": 262443,
+            "fp": 0,
+            "fn": 5045,
+            "tp": 0
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        }
+      },
+      "recall_by_test_group_at_0.85": {
+        "real_paysim_fraud_accounts": 0.0,
+        "injected_ring_accounts": 0.0,
+        "injected_chain_accounts": 0.0,
+        "injected_star_accounts": 0.0
+      },
+      "ring_catch_rates": {
+        "chain": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 13,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 13,
+            "fraction": 0.0
+          }
+        },
+        "star": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          }
+        },
+        "overall": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 22,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 22,
+            "fraction": 0.0
+          }
+        }
+      },
+      "epochs_run": 25,
+      "best_epoch": 5,
+      "best_validation_pr_auc": 0.02300750181345724,
+      "seconds_per_epoch": 0.7428180122375488,
+      "edge_count": 1017144
+    },
+    {
+      "experiment": "edge_shuffle",
+      "model": "graphsage",
+      "seed": 42,
+      "config": "full",
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE"
+      ],
+      "label_shuffle": false,
+      "seconds": 24.51113796234131,
+      "auc_roc": 0.9671152205301935,
+      "average_precision_pr_auc": 0.6846469580260492,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.42437831227068895,
+        "recall": 0.8253716551040634,
+        "f1": 0.5605438513831864,
+        "fpr": 0.021520863577995986,
+        "confusion_matrix": {
+          "tn": 256795,
+          "fp": 5648,
+          "fn": 881,
+          "tp": 4164
+        }
+      },
+      "threshold_sensitivity": {
+        "0.5": {
+          "threshold": 0.5,
+          "precision": 0.2489589695186275,
+          "recall": 0.888800792864222,
+          "f1": 0.3889659958362248,
+          "fpr": 0.05154262068334838,
+          "confusion_matrix": {
+            "tn": 248916,
+            "fp": 13527,
+            "fn": 561,
+            "tp": 4484
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.7": {
+          "threshold": 0.7,
+          "precision": 0.335446953294154,
+          "recall": 0.8598612487611497,
+          "f1": 0.4826166768648829,
+          "fpr": 0.03274615821340253,
+          "confusion_matrix": {
+            "tn": 253849,
+            "fp": 8594,
+            "fn": 707,
+            "tp": 4338
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.85": {
+          "threshold": 0.85,
+          "precision": 0.42437831227068895,
+          "recall": 0.8253716551040634,
+          "f1": 0.5605438513831864,
+          "fpr": 0.021520863577995986,
+          "confusion_matrix": {
+            "tn": 256795,
+            "fp": 5648,
+            "fn": 881,
+            "tp": 4164
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.95": {
+          "threshold": 0.95,
+          "precision": 0.5526509032163314,
+          "recall": 0.7458870168483647,
+          "f1": 0.6348911759743546,
+          "fpr": 0.011606329755413557,
+          "confusion_matrix": {
+            "tn": 259397,
+            "fp": 3046,
+            "fn": 1282,
+            "tp": 3763
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        }
+      },
+      "recall_by_test_group_at_0.85": {
+        "real_paysim_fraud_accounts": 0.8339776195320447,
+        "injected_ring_accounts": 0.5,
+        "injected_chain_accounts": 0.8115942028985508,
+        "injected_star_accounts": 0.14754098360655737
+      },
+      "ring_catch_rates": {
+        "chain": {
+          "at_least_one": {
+            "caught": 13,
+            "total": 13,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 13,
+            "total": 13,
+            "fraction": 1.0
+          }
+        },
+        "star": {
+          "at_least_one": {
+            "caught": 9,
+            "total": 9,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          }
+        },
+        "overall": {
+          "at_least_one": {
+            "caught": 22,
+            "total": 22,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 13,
+            "total": 22,
+            "fraction": 0.5909090909090909
+          }
+        }
+      },
+      "epochs_run": 30,
+      "best_epoch": 30,
+      "best_validation_pr_auc": 0.6753826008584929,
+      "seconds_per_epoch": 0.7967383543650309,
+      "edge_count": 1017144
+    },
+    {
+      "experiment": "structure_only",
+      "model": "xgboost",
+      "seed": 42,
+      "config": "structure_only",
+      "feature_columns": [
+        "in_degree",
+        "out_degree",
+        "total_degree",
+        "unique_neighbours",
+        "weak_component_size",
+        "accounts_within_2_hops"
+      ],
+      "label_shuffle": false,
+      "seconds": 2.287882089614868,
+      "auc_roc": 0.5648420941558778,
+      "average_precision_pr_auc": 0.042182603117124136,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.7394957983193278,
+        "recall": 0.017443012884043606,
+        "f1": 0.03408210689388071,
+        "fpr": 0.00011812088720217342,
+        "confusion_matrix": {
+          "tn": 262412,
+          "fp": 31,
+          "fn": 4957,
+          "tp": 88
+        }
+      },
+      "threshold_sensitivity": {
+        "0.5": {
+          "threshold": 0.5,
+          "precision": 0.03763644792852025,
+          "recall": 0.17700693756194252,
+          "f1": 0.0620742388433199,
+          "fpr": 0.0870055593024009,
+          "confusion_matrix": {
+            "tn": 239609,
+            "fp": 22834,
+            "fn": 4152,
+            "tp": 893
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 3,
+                "total": 9,
+                "fraction": 0.3333333333333333
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 16,
+                "total": 22,
+                "fraction": 0.7272727272727273
+              }
+            }
+          }
+        },
+        "0.7": {
+          "threshold": 0.7,
+          "precision": 0.11482433590402742,
+          "recall": 0.026560951437066403,
+          "f1": 0.043142305215711524,
+          "fpr": 0.003936092789672424,
+          "confusion_matrix": {
+            "tn": 261410,
+            "fp": 1033,
+            "fn": 4911,
+            "tp": 134
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.85": {
+          "threshold": 0.85,
+          "precision": 0.7394957983193278,
+          "recall": 0.017443012884043606,
+          "f1": 0.03408210689388071,
+          "fpr": 0.00011812088720217342,
+          "confusion_matrix": {
+            "tn": 262412,
+            "fp": 31,
+            "fn": 4957,
+            "tp": 88
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        },
+        "0.95": {
+          "threshold": 0.95,
+          "precision": 0.7457627118644068,
+          "recall": 0.017443012884043606,
+          "f1": 0.03408870811543676,
+          "fpr": 0.00011431053600210332,
+          "confusion_matrix": {
+            "tn": 262413,
+            "fp": 30,
+            "fn": 4957,
+            "tp": 88
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 22,
+                "fraction": 0.5909090909090909
+              }
+            }
+          }
+        }
+      },
+      "recall_by_test_group_at_0.85": {
+        "real_paysim_fraud_accounts": 0.0002034587995930824,
+        "injected_ring_accounts": 0.6692307692307692,
+        "injected_chain_accounts": 1.0,
+        "injected_star_accounts": 0.29508196721311475
+      },
+      "ring_catch_rates": {
+        "chain": {
+          "at_least_one": {
+            "caught": 13,
+            "total": 13,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 13,
+            "total": 13,
+            "fraction": 1.0
+          }
+        },
+        "star": {
+          "at_least_one": {
+            "caught": 9,
+            "total": 9,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          }
+        },
+        "overall": {
+          "at_least_one": {
+            "caught": 22,
+            "total": 22,
+            "fraction": 1.0
+          },
+          "at_least_50_percent": {
+            "caught": 13,
+            "total": 22,
+            "fraction": 0.5909090909090909
+          }
+        }
+      },
+      "feature_importances": {
+        "in_degree": 0.04020341485738754,
+        "out_degree": 0.15187957882881165,
+        "total_degree": 0.5587410926818848,
+        "unique_neighbours": 0.0,
+        "weak_component_size": 0.07464692741632462,
+        "accounts_within_2_hops": 0.17452901601791382
+      }
+    },
+    {
+      "experiment": "label_shuffle",
+      "model": "xgboost",
+      "seed": 42,
+      "config": "full",
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE"
+      ],
+      "label_shuffle": true,
+      "seconds": 2.928557872772217,
+      "auc_roc": 0.4563440963443789,
+      "average_precision_pr_auc": 0.02836390353364466,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 3.8103512000701106e-06,
+        "confusion_matrix": {
+          "tn": 262442,
+          "fp": 1,
+          "fn": 5045,
+          "tp": 0
+        }
+      },
+      "threshold_sensitivity": {
+        "0.5": {
+          "threshold": 0.5,
+          "precision": 0.01832615715823466,
+          "recall": 0.4049554013875124,
+          "f1": 0.03506543660158764,
+          "fpr": 0.41699340428207265,
+          "confusion_matrix": {
+            "tn": 153006,
+            "fp": 109437,
+            "fn": 3002,
+            "tp": 2043
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 12,
+                "total": 13,
+                "fraction": 0.9230769230769231
+              },
+              "at_least_50_percent": {
+                "caught": 5,
+                "total": 13,
+                "fraction": 0.38461538461538464
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 7,
+                "total": 9,
+                "fraction": 0.7777777777777778
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 21,
+                "total": 22,
+                "fraction": 0.9545454545454546
+              },
+              "at_least_50_percent": {
+                "caught": 12,
+                "total": 22,
+                "fraction": 0.5454545454545454
+              }
+            }
+          }
+        },
+        "0.7": {
+          "threshold": 0.7,
+          "precision": 0.09848484848484848,
+          "recall": 0.002576808721506442,
+          "f1": 0.005022213637241646,
+          "fpr": 0.00045343179280834313,
+          "confusion_matrix": {
+            "tn": 262324,
+            "fp": 119,
+            "fn": 5032,
+            "tp": 13
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 1,
+                "total": 13,
+                "fraction": 0.07692307692307693
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 1,
+                "total": 22,
+                "fraction": 0.045454545454545456
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        },
+        "0.85": {
+          "threshold": 0.85,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fpr": 3.8103512000701106e-06,
+          "confusion_matrix": {
+            "tn": 262442,
+            "fp": 1,
+            "fn": 5045,
+            "tp": 0
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        },
+        "0.95": {
+          "threshold": 0.95,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fpr": 0.0,
+          "confusion_matrix": {
+            "tn": 262443,
+            "fp": 0,
+            "fn": 5045,
+            "tp": 0
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        }
+      },
+      "recall_by_test_group_at_0.85": {
+        "real_paysim_fraud_accounts": 0.0,
+        "injected_ring_accounts": 0.0,
+        "injected_chain_accounts": 0.0,
+        "injected_star_accounts": 0.0
+      },
+      "ring_catch_rates": {
+        "chain": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 13,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 13,
+            "fraction": 0.0
+          }
+        },
+        "star": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          }
+        },
+        "overall": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 22,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 22,
+            "fraction": 0.0
+          }
+        }
+      },
+      "feature_importances": {
+        "account_age_days": 0.13959042727947235,
+        "current_balance": 0.13266026973724365,
+        "avg_tx_amount": 0.140243798494339,
+        "tx_frequency_per_day": 0.10896061360836029,
+        "unique_counterparties": 0.0,
+        "kyc_status_FULL_BIOMETRIC_VERIFIED": 0.17211654782295227,
+        "kyc_status_PARTIAL_MINIMUM_OTP": 0.15401814877986908,
+        "kyc_status_MINIMUM_KYC": 0.15241017937660217,
+        "kyc_status_NONE": 0.0
+      }
+    },
+    {
+      "experiment": "label_shuffle",
+      "model": "graphsage",
+      "seed": 42,
+      "config": "full",
+      "feature_columns": [
+        "account_age_days",
+        "current_balance",
+        "avg_tx_amount",
+        "tx_frequency_per_day",
+        "unique_counterparties",
+        "kyc_status_FULL_BIOMETRIC_VERIFIED",
+        "kyc_status_PARTIAL_MINIMUM_OTP",
+        "kyc_status_MINIMUM_KYC",
+        "kyc_status_NONE"
+      ],
+      "label_shuffle": true,
+      "seconds": 24.436766862869263,
+      "auc_roc": 0.5509189949659066,
+      "average_precision_pr_auc": 0.024119211306212102,
+      "threshold_0.85": {
+        "threshold": 0.85,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "confusion_matrix": {
+          "tn": 262443,
+          "fp": 0,
+          "fn": 5045,
+          "tp": 0
+        }
+      },
+      "threshold_sensitivity": {
+        "0.5": {
+          "threshold": 0.5,
+          "precision": 0.01886305489474393,
+          "recall": 0.999603567888999,
+          "f1": 0.03702738322937814,
+          "fpr": 0.9994741715343903,
+          "confusion_matrix": {
+            "tn": 138,
+            "fp": 262305,
+            "fn": 2,
+            "tp": 5043
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 13,
+                "total": 13,
+                "fraction": 1.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 9,
+                "total": 9,
+                "fraction": 1.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              },
+              "at_least_50_percent": {
+                "caught": 22,
+                "total": 22,
+                "fraction": 1.0
+              }
+            }
+          }
+        },
+        "0.7": {
+          "threshold": 0.7,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fpr": 0.0,
+          "confusion_matrix": {
+            "tn": 262443,
+            "fp": 0,
+            "fn": 5045,
+            "tp": 0
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        },
+        "0.85": {
+          "threshold": 0.85,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fpr": 0.0,
+          "confusion_matrix": {
+            "tn": 262443,
+            "fp": 0,
+            "fn": 5045,
+            "tp": 0
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        },
+        "0.95": {
+          "threshold": 0.95,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fpr": 0.0,
+          "confusion_matrix": {
+            "tn": 262443,
+            "fp": 0,
+            "fn": 5045,
+            "tp": 0
+          },
+          "ring_catch_rates": {
+            "chain": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 13,
+                "fraction": 0.0
+              }
+            },
+            "star": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 9,
+                "fraction": 0.0
+              }
+            },
+            "overall": {
+              "at_least_one": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              },
+              "at_least_50_percent": {
+                "caught": 0,
+                "total": 22,
+                "fraction": 0.0
+              }
+            }
+          }
+        }
+      },
+      "recall_by_test_group_at_0.85": {
+        "real_paysim_fraud_accounts": 0.0,
+        "injected_ring_accounts": 0.0,
+        "injected_chain_accounts": 0.0,
+        "injected_star_accounts": 0.0
+      },
+      "ring_catch_rates": {
+        "chain": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 13,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 13,
+            "fraction": 0.0
+          }
+        },
+        "star": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 9,
+            "fraction": 0.0
+          }
+        },
+        "overall": {
+          "at_least_one": {
+            "caught": 0,
+            "total": 22,
+            "fraction": 0.0
+          },
+          "at_least_50_percent": {
+            "caught": 0,
+            "total": 22,
+            "fraction": 0.0
+          }
+        }
+      },
+      "epochs_run": 30,
+      "best_epoch": 16,
+      "best_validation_pr_auc": 0.02472331974379101,
+      "seconds_per_epoch": 0.7870805819829305,
+      "edge_count": 1017144
+    }
+  ],
+  "thresholds": {
+    "xgboost": {
+      "0.5": {
+        "threshold": 0.5,
+        "precision": 0.4484379590637548,
+        "recall": 0.9076313181367691,
+        "f1": 0.6002884111169376,
+        "fpr": 0.02145989795879486,
+        "confusion_matrix": {
+          "tn": 256811,
+          "fp": 5632,
+          "fn": 466,
+          "tp": 4579
+        },
+        "ring_catch_rates": {
+          "chain": {
+            "at_least_one": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            }
+          },
+          "star": {
+            "at_least_one": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 0,
+              "total": 9,
+              "fraction": 0.0
+            }
+          },
+          "overall": {
+            "at_least_one": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 22,
+              "fraction": 0.5909090909090909
+            }
+          }
+        }
+      },
+      "0.7": {
+        "threshold": 0.7,
+        "precision": 0.5794272505457815,
+        "recall": 0.8943508424182359,
+        "f1": 0.7032418952618454,
+        "fpr": 0.012478900180229612,
+        "confusion_matrix": {
+          "tn": 259168,
+          "fp": 3275,
+          "fn": 533,
+          "tp": 4512
+        },
+        "ring_catch_rates": {
+          "chain": {
+            "at_least_one": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            }
+          },
+          "star": {
+            "at_least_one": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 0,
+              "total": 9,
+              "fraction": 0.0
+            }
+          },
+          "overall": {
+            "at_least_one": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 22,
+              "fraction": 0.5909090909090909
+            }
+          }
+        }
+      },
+      "0.85": {
+        "threshold": 0.85,
+        "precision": 0.7328320802005013,
+        "recall": 0.8693756194251734,
+        "f1": 0.7952855847688123,
+        "fpr": 0.006092751568912106,
+        "confusion_matrix": {
+          "tn": 260844,
+          "fp": 1599,
+          "fn": 659,
+          "tp": 4386
+        },
+        "ring_catch_rates": {
+          "chain": {
+            "at_least_one": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            }
+          },
+          "star": {
+            "at_least_one": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 0,
+              "total": 9,
+              "fraction": 0.0
+            }
+          },
+          "overall": {
+            "at_least_one": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 22,
+              "fraction": 0.5909090909090909
+            }
+          }
+        }
+      },
+      "0.95": {
+        "threshold": 0.95,
+        "precision": 0.832345971563981,
+        "recall": 0.8354806739345887,
+        "f1": 0.8339103768918785,
+        "fpr": 0.003234988168859524,
+        "confusion_matrix": {
+          "tn": 261594,
+          "fp": 849,
+          "fn": 830,
+          "tp": 4215
+        },
+        "ring_catch_rates": {
+          "chain": {
+            "at_least_one": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            }
+          },
+          "star": {
+            "at_least_one": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 0,
+              "total": 9,
+              "fraction": 0.0
+            }
+          },
+          "overall": {
+            "at_least_one": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 22,
+              "fraction": 0.5909090909090909
+            }
+          }
+        }
+      }
+    },
+    "graphsage": {
+      "0.5": {
+        "threshold": 0.5,
+        "precision": 0.3410012585652356,
+        "recall": 0.9666997026759168,
+        "f1": 0.5041608518116504,
+        "fpr": 0.03591256006066079,
+        "confusion_matrix": {
+          "tn": 253018,
+          "fp": 9425,
+          "fn": 168,
+          "tp": 4877
+        },
+        "ring_catch_rates": {
+          "chain": {
+            "at_least_one": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            }
+          },
+          "star": {
+            "at_least_one": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            }
+          },
+          "overall": {
+            "at_least_one": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            }
+          }
+        }
+      },
+      "0.7": {
+        "threshold": 0.7,
+        "precision": 0.4483115417176183,
+        "recall": 0.9446977205153617,
+        "f1": 0.6080632814493493,
+        "fpr": 0.022347709788411198,
+        "confusion_matrix": {
+          "tn": 256578,
+          "fp": 5865,
+          "fn": 279,
+          "tp": 4766
+        },
+        "ring_catch_rates": {
+          "chain": {
+            "at_least_one": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            }
+          },
+          "star": {
+            "at_least_one": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            }
+          },
+          "overall": {
+            "at_least_one": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            }
+          }
+        }
+      },
+      "0.85": {
+        "threshold": 0.85,
+        "precision": 0.5747126436781609,
+        "recall": 0.9018830525272548,
+        "f1": 0.7020521524456103,
+        "fpr": 0.012829452490636061,
+        "confusion_matrix": {
+          "tn": 259076,
+          "fp": 3367,
+          "fn": 495,
+          "tp": 4550
+        },
+        "ring_catch_rates": {
+          "chain": {
+            "at_least_one": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            }
+          },
+          "star": {
+            "at_least_one": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            }
+          },
+          "overall": {
+            "at_least_one": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            }
+          }
+        }
+      },
+      "0.95": {
+        "threshold": 0.95,
+        "precision": 0.7773093841642229,
+        "recall": 0.8406342913776016,
+        "f1": 0.8077325968955338,
+        "fpr": 0.004629576708085184,
+        "confusion_matrix": {
+          "tn": 261228,
+          "fp": 1215,
+          "fn": 804,
+          "tp": 4241
+        },
+        "ring_catch_rates": {
+          "chain": {
+            "at_least_one": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 13,
+              "total": 13,
+              "fraction": 1.0
+            }
+          },
+          "star": {
+            "at_least_one": {
+              "caught": 9,
+              "total": 9,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 6,
+              "total": 9,
+              "fraction": 0.6666666666666666
+            }
+          },
+          "overall": {
+            "at_least_one": {
+              "caught": 22,
+              "total": 22,
+              "fraction": 1.0
+            },
+            "at_least_50_percent": {
+              "caught": 19,
+              "total": 22,
+              "fraction": 0.8636363636363636
+            }
+          }
+        }
+      }
+    }
+  },
+  "checks": {
+    "test_ids_and_disjoint": true,
+    "feature_lists_clean": true,
+    "label_shuffle_auc_between_0.4_and_0.6": true,
+    "reproducibility_xgb": true,
+    "reproducibility_gnn": true,
+    "edge_shuffle_same_edge_count": true
+  }
+}
