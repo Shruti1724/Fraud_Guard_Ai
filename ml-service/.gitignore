@@ -14,3 +14,10 @@ data/*.csv
 
 # Local backup files
 *.bak
+
+/results/ensemble/folds/
+/results/ensemble/sage_edge_L2_oof.csv
+/results/ensemble/val_predictions.csv
+/results/ensemble/*.bak
+/artifacts/blended_scores.csv
+/results/ensemble/.mplcache/
