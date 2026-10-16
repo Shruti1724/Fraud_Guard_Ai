@@ -1,0 +1,94 @@
+{
+  "seed": 42,
+  "risk_flag_threshold": 0.85,
+  "feature_columns": [
+    "account_age_days",
+    "current_balance",
+    "avg_tx_amount",
+    "tx_frequency_per_day",
+    "unique_counterparties",
+    "kyc_status_FULL_BIOMETRIC_VERIFIED",
+    "kyc_status_PARTIAL_MINIMUM_OTP",
+    "kyc_status_MINIMUM_KYC",
+    "kyc_status_NONE"
+  ],
+  "scale_pos_weight": 52.02344745561125,
+  "train_accounts": 624139,
+  "test_accounts": 267488,
+  "train_positive_accounts": 11771,
+  "test_positive_accounts": 5045,
+  "auc_roc": 0.9878270929240468,
+  "average_precision_pr_auc": 0.888041722505088,
+  "threshold_0.85": {
+    "threshold": 0.85,
+    "precision": 0.7314954051796158,
+    "recall": 0.8677898909811694,
+    "f1": 0.7938349954669084,
+    "fpr": 0.006123234378512667,
+    "confusion_matrix": {
+      "tn": 260836,
+      "fp": 1607,
+      "fn": 667,
+      "tp": 4378
+    },
+    "flagged_accounts": 5985
+  },
+  "threshold_0.5": {
+    "threshold": 0.5,
+    "precision": 0.4411566265060241,
+    "recall": 0.9072348860257681,
+    "f1": 0.5936446173800259,
+    "fpr": 0.0220924162580065,
+    "confusion_matrix": {
+      "tn": 256645,
+      "fp": 5798,
+      "fn": 468,
+      "tp": 4577
+    },
+    "flagged_accounts": 10375
+  },
+  "recall_by_test_group_at_0.85": {
+    "real_paysim_fraud_accounts": 0.8756866734486266,
+    "injected_ring_accounts": 0.5692307692307692,
+    "injected_chain_accounts": 0.8115942028985508,
+    "injected_star_accounts": 0.29508196721311475
+  },
+  "ring_catch_rates_at_0.85": {
+    "chain": {
+      "caught_at_least_one": {
+        "caught": 13,
+        "total": 13,
+        "rate": 1.0
+      },
+      "strongly_caught_at_least_half": {
+        "caught": 13,
+        "total": 13,
+        "rate": 1.0
+      }
+    },
+    "star": {
+      "caught_at_least_one": {
+        "caught": 9,
+        "total": 9,
+        "rate": 1.0
+      },
+      "strongly_caught_at_least_half": {
+        "caught": 0,
+        "total": 9,
+        "rate": 0.0
+      }
+    },
+    "overall": {
+      "caught_at_least_one": {
+        "caught": 22,
+        "total": 22,
+        "rate": 1.0
+      },
+      "strongly_caught_at_least_half": {
+        "caught": 13,
+        "total": 22,
+        "rate": 0.5909090909090909
+      }
+    }
+  }
+}

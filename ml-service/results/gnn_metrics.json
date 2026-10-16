@@ -1,0 +1,100 @@
+{
+  "seed": 42,
+  "risk_flag_threshold": 0.85,
+  "feature_columns": [
+    "account_age_days",
+    "current_balance",
+    "avg_tx_amount",
+    "tx_frequency_per_day",
+    "unique_counterparties",
+    "kyc_status_FULL_BIOMETRIC_VERIFIED",
+    "kyc_status_PARTIAL_MINIMUM_OTP",
+    "kyc_status_MINIMUM_KYC",
+    "kyc_status_NONE"
+  ],
+  "scale_pos_weight": 52.02293751179913,
+  "train_accounts": 624139,
+  "test_accounts": 267488,
+  "train_positive_accounts": 10594,
+  "test_positive_accounts": 5045,
+  "auc_roc": 0.9983746386166058,
+  "average_precision_pr_auc": 0.9491404463458706,
+  "threshold_0.85": {
+    "threshold": 0.85,
+    "precision": 0.704992657856094,
+    "recall": 0.9516352824578791,
+    "f1": 0.8099536060733867,
+    "fpr": 0.007654995560940852,
+    "confusion_matrix": {
+      "tn": 260434,
+      "fp": 2009,
+      "fn": 244,
+      "tp": 4801
+    },
+    "flagged_accounts": 6810
+  },
+  "threshold_0.5": {
+    "threshold": 0.5,
+    "precision": 0.5233280674038968,
+    "recall": 0.9849355797819623,
+    "f1": 0.683493810178817,
+    "fpr": 0.01724564953151732,
+    "confusion_matrix": {
+      "tn": 257917,
+      "fp": 4526,
+      "fn": 76,
+      "tp": 4969
+    },
+    "flagged_accounts": 9495
+  },
+  "recall_by_test_group_at_0.85": {
+    "real_paysim_fraud_accounts": 0.9503560528992879,
+    "injected_ring_accounts": 1.0,
+    "injected_chain_accounts": 1.0,
+    "injected_star_accounts": 1.0
+  },
+  "ring_catch_rates_at_0.85": {
+    "chain": {
+      "caught_at_least_one": {
+        "caught": 13,
+        "total": 13,
+        "rate": 1.0
+      },
+      "strongly_caught_at_least_half": {
+        "caught": 13,
+        "total": 13,
+        "rate": 1.0
+      }
+    },
+    "star": {
+      "caught_at_least_one": {
+        "caught": 9,
+        "total": 9,
+        "rate": 1.0
+      },
+      "strongly_caught_at_least_half": {
+        "caught": 9,
+        "total": 9,
+        "rate": 1.0
+      }
+    },
+    "overall": {
+      "caught_at_least_one": {
+        "caught": 22,
+        "total": 22,
+        "rate": 1.0
+      },
+      "strongly_caught_at_least_half": {
+        "caught": 22,
+        "total": 22,
+        "rate": 1.0
+      }
+    }
+  },
+  "best_validation_pr_auc": 0.9507956118701429,
+  "best_epoch": 186,
+  "epochs_run": 200,
+  "seconds_per_epoch": 0.8107633483409882,
+  "num_nodes": 891627,
+  "num_edges": 1017144
+}
