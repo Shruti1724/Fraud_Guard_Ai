@@ -414,9 +414,11 @@ def build_pdf(filename="FraudGuard_AI_Handover_Member_A.pdf"):
             Paragraph("<font color='#166534'><b>Aligned</b></font>", table_cell)
         ],
         [
-            Paragraph("5. Demo Presentation IDs", table_cell),
-            Paragraph("Mock UPI App Pre-set Dropdown", table_cell),
-            Paragraph("<b>Mule Ring</b>: <font face='Courier'>C1000039615</font> (auto_block). <b>Innocent Decoy</b>: <font face='Courier'>acc_decoy_family_01</font> (resolved as clear false-alarm).", table_cell),
+            Paragraph("5. Demo Presentation Accounts", table_cell),
+            Paragraph("Mock UPI App Dropdown / Curl", table_cell),
+            Paragraph("<b>Auto-Block</b>: <font face='Courier'>C1000039615</font> (mule chain), <font face='Courier'>acc_star_burst_02</font><br/>"
+                      "<b>Clear (Decoy)</b>: <font face='Courier'>acc_decoy_merchant_03</font>, <font face='Courier'>acc_decoy_payroll_04</font><br/>"
+                      "<b>Escalate</b>: <font face='Courier'>acc_suspicious_device_04</font> (rooted/Tor device hold)", table_cell),
             Paragraph("<font color='#166534'><b>Verified</b></font>", table_cell)
         ]
     ]

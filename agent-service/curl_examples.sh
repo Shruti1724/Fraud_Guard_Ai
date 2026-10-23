@@ -69,12 +69,28 @@ curl -s -X POST "${BASE_URL}/investigate" \
        "account_id": "acc_decoy_family_01"
      }' | python3 -m json.tool
 
+# 7B. Investigate Innocent Payroll Decoy (Expected: clear)
+print_step "7B" "POST /investigate for Corporate Payroll Decoy (acc_decoy_payroll_04 -> clear)"
+curl -s -X POST "${BASE_URL}/investigate" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "account_id": "acc_decoy_payroll_04"
+     }' | python3 -m json.tool
+
 # 8. Investigate Borderline Behavioral Anomaly (Expected: escalate)
 print_step "8" "POST /investigate for Borderline Anomaly (acc_suspicious_device_04 -> escalate)"
 curl -s -X POST "${BASE_URL}/investigate" \
      -H "Content-Type: application/json" \
      -d '{
        "account_id": "acc_suspicious_device_04"
+     }' | python3 -m json.tool
+
+# 8B. Investigate Clean Benign Dataset Account (Expected: clear)
+print_step "8B" "POST /investigate for Benign Retail Customer (C1000621564 -> clear)"
+curl -s -X POST "${BASE_URL}/investigate" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "account_id": "C1000621564"
      }' | python3 -m json.tool
 
 # 9. Lightning-Fast Pre-Cached Demo Output

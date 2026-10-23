@@ -141,32 +141,8 @@ def decision_node(state: InvestigationState) -> Dict[str, Any]:
     # STAGE 1: Hard Business Rules Pre-Filter
     # -----------------------------------------------------------------------
     
-    # Rule 1A: Hard Auto-Block on Confirmed Mule Layering
-    is_critical_mule = (is_known_mule and risk_score >= settings.FLAG_THRESHOLD) or (score >= 90 and risk_score >= settings.FLAG_THRESHOLD)
-    if is_critical_mule or ((mule or cycle or factual_mule) and age < 45 and balance < 2000):
-        return {
-            "decision": "auto_block",
-            "decision_reasoning": (
-                f"Automated block enforced by Rule MULE_CHAIN_CONFIRMED: High suspicion score ({score}/100) "
-                f"with blended risk {risk_score:.3f} and confirmed mule topology signals."
-            ),
-            "rule_triggered": "MULE_CHAIN_CONFIRMED",
-            "decision_confidence": 0.99
-        }
-        
-    # Rule 1B: Hard Auto-Block on Star-Burst Smurfing
-    if (star or (is_known_mule and "star" in account_id.lower())) and score >= 80 and age < 45:
-        return {
-            "decision": "auto_block",
-            "decision_reasoning": (
-                f"Automated block enforced by Rule STAR_BURST_SMURFING: Sudden credit fragmentation "
-                f"into sub-threshold transfers on new account via emulator environment."
-            ),
-            "rule_triggered": "STAR_BURST_SMURFING",
-            "decision_confidence": 0.98
-        }
-
-    # Rule 2: Hard Clear on Verified Innocent Decoy Look-alikes
+    # Rule 1: Hard Clear on Verified Innocent Decoy Look-alikes
+    # Evaluated first to clear legitimate businesses/payroll/family over-flagged by GNN
     if decoy and decoy != "none" and findings.get("decoy_confidence", 0.0) >= 0.85:
         if age > 90 and kyc == "FULL_BIOMETRIC_VERIFIED":
             return {
@@ -178,6 +154,31 @@ def decision_node(state: InvestigationState) -> Dict[str, Any]:
                 "rule_triggered": f"DECOY_{decoy.upper()}_CLEARED",
                 "decision_confidence": 0.96
             }
+
+    # Rule 2A: Hard Auto-Block on Confirmed Mule Layering
+    is_critical_mule = (is_known_mule and risk_score >= settings.FLAG_THRESHOLD) or (score >= 90 and risk_score >= settings.FLAG_THRESHOLD)
+    if (is_critical_mule or ((mule or cycle or factual_mule) and age < 45 and balance < 2000)) and (decoy == "none" or not decoy):
+        return {
+            "decision": "auto_block",
+            "decision_reasoning": (
+                f"Automated block enforced by Rule MULE_CHAIN_CONFIRMED: High suspicion score ({score}/100) "
+                f"with blended risk {risk_score:.3f} and confirmed mule topology signals."
+            ),
+            "rule_triggered": "MULE_CHAIN_CONFIRMED",
+            "decision_confidence": 0.99
+        }
+        
+    # Rule 2B: Hard Auto-Block on Star-Burst Smurfing
+    if (star or (is_known_mule and "star" in account_id.lower())) and score >= 80 and age < 45:
+        return {
+            "decision": "auto_block",
+            "decision_reasoning": (
+                f"Automated block enforced by Rule STAR_BURST_SMURFING: Sudden credit fragmentation "
+                f"into sub-threshold transfers on new account via emulator environment."
+            ),
+            "rule_triggered": "STAR_BURST_SMURFING",
+            "decision_confidence": 0.98
+        }
 
     # Rule 3: Hard Clear on Low Baseline Risk
     # Safety guard: Never clear an account that has victim/sink links or risk_score >= WARN_THRESHOLD!
