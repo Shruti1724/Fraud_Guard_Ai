@@ -1,0 +1,79 @@
+{
+  "timestamp": 1792141347.906515,
+  "total_accounts": 11,
+  "median_latency_seconds": 13.119,
+  "p95_latency_seconds": 16.413,
+  "min_latency_seconds": 9.924,
+  "max_latency_seconds": 16.413,
+  "average_latency_seconds": 13.334,
+  "human_analyst_baseline_seconds": 1500,
+  "speedup_factor": 114.3,
+  "runs": [
+    {
+      "account_id": "C1000039615",
+      "status_code": 200,
+      "duration_seconds": 15.726,
+      "decision": "AUTO_BLOCK"
+    },
+    {
+      "account_id": "acc_chain_016_4",
+      "status_code": 200,
+      "duration_seconds": 12.975,
+      "decision": "AUTO_BLOCK"
+    },
+    {
+      "account_id": "acc_mule_chain_01",
+      "status_code": 200,
+      "duration_seconds": 10.587,
+      "decision": "AUTO_BLOCK"
+    },
+    {
+      "account_id": "acc_star_burst_02",
+      "status_code": 200,
+      "duration_seconds": 12.208,
+      "decision": "AUTO_BLOCK"
+    },
+    {
+      "account_id": "acc_decoy_family_01",
+      "status_code": 200,
+      "duration_seconds": 12.193,
+      "decision": "CLEAR"
+    },
+    {
+      "account_id": "acc_decoy_merchant_03",
+      "status_code": 200,
+      "duration_seconds": 13.119,
+      "decision": "CLEAR"
+    },
+    {
+      "account_id": "acc_decoy_forward_02",
+      "status_code": 200,
+      "duration_seconds": 9.924,
+      "decision": "CLEAR"
+    },
+    {
+      "account_id": "acc_decoy_payroll_04",
+      "status_code": 200,
+      "duration_seconds": 14.567,
+      "decision": "CLEAR"
+    },
+    {
+      "account_id": "acc_suspicious_device_04",
+      "status_code": 200,
+      "duration_seconds": 15.674,
+      "decision": "AUTO_BLOCK"
+    },
+    {
+      "account_id": "C1001991700",
+      "status_code": 200,
+      "duration_seconds": 13.291,
+      "decision": "CLEAR"
+    },
+    {
+      "account_id": "acc_legit_retail_03",
+      "status_code": 200,
+      "duration_seconds": 16.413,
+      "decision": "CLEAR"
+    }
+  ]
+}
