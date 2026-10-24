@@ -13,10 +13,11 @@ if __name__ == "__main__":
     print("Swagger UI Docs : http://127.0.0.1:8001/docs")
     print("Endpoint        : POST http://127.0.0.1:8001/investigate")
     print("==================================================================")
+    from config import settings
     uvicorn.run(
         "main:app",
-        host="0.0.0.0",
-        port=8001,
+        host=settings.host,
+        port=settings.port,
         reload=True,
         app_dir=str(BASE_DIR)
     )

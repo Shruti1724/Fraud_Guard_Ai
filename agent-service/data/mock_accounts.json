@@ -10,6 +10,11 @@
     "ip_address": "103.21.144.12",
     "kyc_status": "PARTIAL_MINIMUM_OTP",
     "current_balance": 120.0,
+    "risk_score": 0.95,
+    "xgb_score": 0.88,
+    "sage_score": 0.98,
+    "risk_level": "CRITICAL",
+    "category": "relay",
     "recent_transactions": [
       {
         "step": 101,
@@ -81,6 +86,11 @@
     "ip_address": "45.112.55.90",
     "kyc_status": "MINIMUM_KYC",
     "current_balance": 450.0,
+    "risk_score": 0.88,
+    "xgb_score": 0.82,
+    "sage_score": 0.91,
+    "risk_level": "CRITICAL",
+    "category": "relay",
     "recent_transactions": [
       {
         "step": 201,
@@ -163,6 +173,11 @@
     "ip_address": "185.220.101.5",
     "kyc_status": "FULL_BIOMETRIC_VERIFIED",
     "current_balance": 15000.0,
+    "risk_score": 0.74,
+    "xgb_score": 0.78,
+    "sage_score": 0.72,
+    "risk_level": "HIGH",
+    "category": "personal",
     "recent_transactions": [
       {
         "step": 301,
@@ -211,6 +226,11 @@
     "ip_address": "122.161.44.89",
     "kyc_status": "FULL_BIOMETRIC_VERIFIED",
     "current_balance": 45200.0,
+    "risk_score": 0.08,
+    "xgb_score": 0.05,
+    "sage_score": 0.09,
+    "risk_level": "LOW",
+    "category": "merchant",
     "recent_transactions": [
       {
         "step": 401,
@@ -254,6 +274,444 @@
         "total_volume": 540.0,
         "tx_count": 1,
         "risk_label": "BENIGN"
+      }
+    ]
+  },
+  "C1000018432": {
+    "account_id": "C1000018432",
+    "vpa_address": "c1000018432@upi",
+    "account_age_days": 420,
+    "avg_tx_amount": 1150.0,
+    "tx_frequency_per_day": 0.8,
+    "unique_counterparties": 8,
+    "device_id": "DEV_SAMSUNG_A14_PERSONAL",
+    "ip_address": "49.36.110.45",
+    "kyc_status": "FULL_BIOMETRIC_VERIFIED",
+    "current_balance": 8450.0,
+    "risk_score": 0.04,
+    "xgb_score": 0.03,
+    "sage_score": 0.045,
+    "risk_level": "LOW",
+    "category": "personal",
+    "recent_transactions": [
+      {
+        "step": 501,
+        "type": "PAYMENT",
+        "amount": 650.0,
+        "nameOrig": "C1000018432",
+        "nameDest": "merchant.grocery@oksbi",
+        "timestamp": "2026-09-12T11:00:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "merchant.grocery@oksbi",
+        "relation": "outflow",
+        "total_volume": 650.0,
+        "tx_count": 1,
+        "risk_label": "BENIGN"
+      }
+    ]
+  },
+  "C1001120910": {
+    "account_id": "C1001120910",
+    "vpa_address": "c1001120910@upi",
+    "account_age_days": 210,
+    "avg_tx_amount": 14500.0,
+    "tx_frequency_per_day": 4.5,
+    "unique_counterparties": 12,
+    "device_id": "DEV_REDMI_NOTE12",
+    "ip_address": "122.161.88.19",
+    "kyc_status": "FULL_BIOMETRIC_VERIFIED",
+    "current_balance": 18200.0,
+    "risk_score": 0.703,
+    "xgb_score": 0.68,
+    "sage_score": 0.71,
+    "risk_level": "HIGH",
+    "category": "personal",
+    "recent_transactions": [
+      {
+        "step": 601,
+        "type": "TRANSFER",
+        "amount": 25000.0,
+        "nameOrig": "C1001120910",
+        "nameDest": "friend.split@paytm",
+        "timestamp": "2026-09-12T14:30:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "friend.split@paytm",
+        "relation": "outflow",
+        "total_volume": 25000.0,
+        "tx_count": 1,
+        "risk_label": "BENIGN"
+      }
+    ]
+  },
+  "C1000039615": {
+    "account_id": "C1000039615",
+    "vpa_address": "c1000039615@upi",
+    "account_age_days": 8,
+    "avg_tx_amount": 47200.0,
+    "tx_frequency_per_day": 28.0,
+    "unique_counterparties": 15,
+    "device_id": "DEV_EMULATOR_041",
+    "ip_address": "103.21.144.99",
+    "kyc_status": "PARTIAL_MINIMUM_OTP",
+    "current_balance": 85.0,
+    "risk_score": 0.937,
+    "xgb_score": 0.89,
+    "sage_score": 0.96,
+    "risk_level": "CRITICAL",
+    "category": "relay",
+    "recent_transactions": [
+      {
+        "step": 701,
+        "type": "PAYMENT",
+        "amount": 48500.0,
+        "nameOrig": "C_VICTIM_401",
+        "nameDest": "C1000039615",
+        "timestamp": "2026-09-12T16:01:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 702,
+        "type": "TRANSFER",
+        "amount": 48400.0,
+        "nameOrig": "C1000039615",
+        "nameDest": "acc_chain_relay_final",
+        "timestamp": "2026-09-12T16:05:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "C_VICTIM_401",
+        "relation": "inflow",
+        "total_volume": 48500.0,
+        "tx_count": 1,
+        "risk_label": "VICTIM_FLAGGED"
+      },
+      {
+        "neighbor_id": "acc_chain_relay_final",
+        "relation": "outflow",
+        "total_volume": 48400.0,
+        "tx_count": 1,
+        "risk_label": "HIGH_RISK_SINK"
+      }
+    ]
+  },
+  "acc_chain_016_4": {
+    "account_id": "acc_chain_016_4",
+    "vpa_address": "acc_chain_016_4@upi",
+    "account_age_days": 3,
+    "avg_tx_amount": 89000.0,
+    "tx_frequency_per_day": 40.0,
+    "unique_counterparties": 6,
+    "device_id": "DEV_EMULATOR_016",
+    "ip_address": "103.21.144.16",
+    "kyc_status": "MINIMUM_KYC",
+    "current_balance": 15.0,
+    "risk_score": 1.0,
+    "xgb_score": 0.98,
+    "sage_score": 1.0,
+    "risk_level": "CRITICAL",
+    "category": "relay",
+    "recent_transactions": [
+      {
+        "step": 801,
+        "type": "TRANSFER",
+        "amount": 92000.0,
+        "nameOrig": "acc_chain_016_3",
+        "nameDest": "acc_chain_016_4",
+        "timestamp": "2026-09-12T18:00:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 802,
+        "type": "CASH_OUT",
+        "amount": 91800.0,
+        "nameOrig": "acc_chain_016_4",
+        "nameDest": "acc_chain_016_sink",
+        "timestamp": "2026-09-12T18:03:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "acc_chain_016_3",
+        "relation": "inflow",
+        "total_volume": 92000.0,
+        "tx_count": 1,
+        "risk_label": "RING_CHAIN_HOP3"
+      },
+      {
+        "neighbor_id": "acc_chain_016_sink",
+        "relation": "outflow",
+        "total_volume": 91800.0,
+        "tx_count": 1,
+        "risk_label": "HIGH_RISK_SINK"
+      }
+    ]
+  },
+  "C1001991700": {
+    "account_id": "C1001991700",
+    "vpa_address": "c1001991700@upi",
+    "account_age_days": 940,
+    "avg_tx_amount": 420.0,
+    "tx_frequency_per_day": 52.0,
+    "unique_counterparties": 310,
+    "device_id": "DEV_POS_MERCHANT_99",
+    "ip_address": "49.36.200.12",
+    "kyc_status": "FULL_BIOMETRIC_VERIFIED",
+    "current_balance": 68400.0,
+    "risk_score": 0.0,
+    "xgb_score": 0.0,
+    "sage_score": 0.0,
+    "risk_level": "LOW",
+    "category": "merchant",
+    "recent_transactions": [
+      {
+        "step": 901,
+        "type": "PAYMENT",
+        "amount": 350.0,
+        "nameOrig": "C_BUYER_01",
+        "nameDest": "C1001991700",
+        "timestamp": "2026-09-12T19:10:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "C_BUYER_01",
+        "relation": "inflow",
+        "total_volume": 350.0,
+        "tx_count": 1,
+        "risk_label": "BENIGN"
+      }
+    ]
+  },
+  "acc_decoy_family_01": {
+    "account_id": "acc_decoy_family_01",
+    "vpa_address": "anita.family@oksbi",
+    "account_age_days": 1280,
+    "avg_tx_amount": 3200.0,
+    "tx_frequency_per_day": 0.5,
+    "unique_counterparties": 4,
+    "device_id": "DEV_IPHONE_FAMILY_MOM",
+    "ip_address": "49.36.12.80",
+    "kyc_status": "FULL_BIOMETRIC_VERIFIED",
+    "current_balance": 34000.0,
+    "risk_score": 0.865,
+    "xgb_score": 0.12,
+    "sage_score": 0.92,
+    "risk_level": "CRITICAL",
+    "category": "family",
+    "recent_transactions": [
+      {
+        "step": 1001,
+        "type": "TRANSFER",
+        "amount": 2500.0,
+        "nameOrig": "anita.family@oksbi",
+        "nameDest": "son.college@okaxis",
+        "timestamp": "2026-09-10T14:00:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 1002,
+        "type": "TRANSFER",
+        "amount": 4000.0,
+        "nameOrig": "husband.salary@okicici",
+        "nameDest": "anita.family@oksbi",
+        "timestamp": "2026-09-05T09:30:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "son.college@okaxis",
+        "relation": "outflow",
+        "total_volume": 2500.0,
+        "tx_count": 1,
+        "risk_label": "BENIGN_FAMILY"
+      },
+      {
+        "neighbor_id": "husband.salary@okicici",
+        "relation": "inflow",
+        "total_volume": 4000.0,
+        "tx_count": 1,
+        "risk_label": "BENIGN_FAMILY"
+      }
+    ]
+  },
+  "acc_decoy_forward_02": {
+    "account_id": "acc_decoy_forward_02",
+    "vpa_address": "vikram.roommate@paytm",
+    "account_age_days": 730,
+    "avg_tx_amount": 12000.0,
+    "tx_frequency_per_day": 0.8,
+    "unique_counterparties": 5,
+    "device_id": "DEV_ONEPLUS_PERSONAL",
+    "ip_address": "122.161.99.30",
+    "kyc_status": "FULL_BIOMETRIC_VERIFIED",
+    "current_balance": 22000.0,
+    "risk_score": 0.872,
+    "xgb_score": 0.18,
+    "sage_score": 0.94,
+    "risk_level": "CRITICAL",
+    "category": "forward_chain",
+    "recent_transactions": [
+      {
+        "step": 1101,
+        "type": "TRANSFER",
+        "amount": 14500.0,
+        "nameOrig": "flatmate_1@paytm",
+        "nameDest": "acc_decoy_forward_02",
+        "timestamp": "2026-09-08T18:00:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 1102,
+        "type": "TRANSFER",
+        "amount": 29000.0,
+        "nameOrig": "acc_decoy_forward_02",
+        "nameDest": "landlord.rent@hdfcbank",
+        "timestamp": "2026-09-09T10:15:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "flatmate_1@paytm",
+        "relation": "inflow",
+        "total_volume": 14500.0,
+        "tx_count": 1,
+        "risk_label": "BENIGN_ROOMMATE"
+      },
+      {
+        "neighbor_id": "landlord.rent@hdfcbank",
+        "relation": "outflow",
+        "total_volume": 29000.0,
+        "tx_count": 1,
+        "risk_label": "BENIGN_LANDLORD"
+      }
+    ]
+  },
+  "acc_decoy_merchant_03": {
+    "account_id": "acc_decoy_merchant_03",
+    "vpa_address": "gupta.sweets.express@icici",
+    "account_age_days": 950,
+    "avg_tx_amount": 480.0,
+    "tx_frequency_per_day": 65.0,
+    "unique_counterparties": 280,
+    "device_id": "DEV_BILLING_DESK_GUPTA",
+    "ip_address": "103.21.144.5",
+    "kyc_status": "FULL_BIOMETRIC_VERIFIED",
+    "current_balance": 85000.0,
+    "risk_score": 0.892,
+    "xgb_score": 0.08,
+    "sage_score": 0.96,
+    "risk_level": "CRITICAL",
+    "category": "merchant_hub",
+    "recent_transactions": [
+      {
+        "step": 1201,
+        "type": "PAYMENT",
+        "amount": 320.0,
+        "nameOrig": "cust_101@upi",
+        "nameDest": "acc_decoy_merchant_03",
+        "timestamp": "2026-09-12T17:00:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 1202,
+        "type": "PAYMENT",
+        "amount": 540.0,
+        "nameOrig": "cust_102@upi",
+        "nameDest": "acc_decoy_merchant_03",
+        "timestamp": "2026-09-12T17:05:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 1203,
+        "type": "TRANSFER",
+        "amount": 25000.0,
+        "nameOrig": "acc_decoy_merchant_03",
+        "nameDest": "dairy.vendor.wholesale@sbi",
+        "timestamp": "2026-09-12T18:00:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "cust_101@upi",
+        "relation": "inflow",
+        "total_volume": 320.0,
+        "tx_count": 1,
+        "risk_label": "CUSTOMER"
+      },
+      {
+        "neighbor_id": "dairy.vendor.wholesale@sbi",
+        "relation": "outflow",
+        "total_volume": 25000.0,
+        "tx_count": 1,
+        "risk_label": "WHOLESALE_SUPPLIER"
+      }
+    ]
+  },
+  "acc_decoy_payroll_04": {
+    "account_id": "acc_decoy_payroll_04",
+    "vpa_address": "apex.tech.salaries@hdfcbank",
+    "account_age_days": 1100,
+    "avg_tx_amount": 55000.0,
+    "tx_frequency_per_day": 20.0,
+    "unique_counterparties": 25,
+    "device_id": "DEV_CORP_FINANCE_SERVER",
+    "ip_address": "122.161.40.10",
+    "kyc_status": "FULL_BIOMETRIC_VERIFIED",
+    "current_balance": 450000.0,
+    "risk_score": 0.885,
+    "xgb_score": 0.15,
+    "sage_score": 0.95,
+    "risk_level": "CRITICAL",
+    "category": "payroll_fanout",
+    "recent_transactions": [
+      {
+        "step": 1301,
+        "type": "TRANSFER",
+        "amount": 62000.0,
+        "nameOrig": "acc_decoy_payroll_04",
+        "nameDest": "emp_01@upi",
+        "timestamp": "2026-09-01T10:00:00Z",
+        "status": "SUCCESS"
+      },
+      {
+        "step": 1302,
+        "type": "TRANSFER",
+        "amount": 58000.0,
+        "nameOrig": "acc_decoy_payroll_04",
+        "nameDest": "emp_02@upi",
+        "timestamp": "2026-09-01T10:01:00Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "graph_neighbors": [
+      {
+        "neighbor_id": "emp_01@upi",
+        "relation": "outflow",
+        "total_volume": 62000.0,
+        "tx_count": 1,
+        "risk_label": "EMPLOYEE"
+      },
+      {
+        "neighbor_id": "emp_02@upi",
+        "relation": "outflow",
+        "total_volume": 58000.0,
+        "tx_count": 1,
+        "risk_label": "EMPLOYEE"
       }
     ]
   }
