@@ -373,6 +373,8 @@ function Graph3D({ graphData, selectedId, onSelectNode, onSelectLink, bus, layou
         graphData={visibleData}
         backgroundColor="#04060c"
         controlType="orbit"
+        // node dragging triggers a three.js OrbitControls crash on pointercancel
+        enableNodeDrag={false}
         showNavInfo={false}
         nodeId="id"
         nodeThreeObject={buildNode}
