@@ -7,7 +7,7 @@ const investigationCaseSchema = new mongoose.Schema(
     account_id: { type: String, required: true, index: true },
     triggered_by: {
       type: String,
-      enum: ["LAYER2_GNN_THRESHOLD", "MANUAL"],
+      enum: ["LAYER2_GNN_THRESHOLD", "MANUAL", "SIMULATION"],
       default: "LAYER2_GNN_THRESHOLD",
     },
     investigator_findings: { type: mongoose.Schema.Types.Mixed, default: {} },
@@ -23,6 +23,14 @@ const investigationCaseSchema = new mongoose.Schema(
       enum: ["RESOLVED", "UNDER_REVIEW"],
       default: "RESOLVED",
     },
+    // Parsed from the agent report (see services/reportParser.js).
+    findings: { type: mongoose.Schema.Types.Mixed, default: {} },
+    duration_ms: { type: Number },
+    decision_source: { type: String, default: "AGENT" }, // AGENT | FAILSAFE | ANALYST
+    trigger_txn_id: { type: String },
+    resolved_by: { type: String },
+    analyst_note: { type: String },
+    updated_at: { type: Date, default: Date.now },
     created_at: { type: Date, default: Date.now },
   },
   { collection: "investigation_cases" }

@@ -19,6 +19,13 @@ const accountSchema = new mongoose.Schema(
       enum: ["ACTIVE", "FROZEN", "UNDER_INVESTIGATION"],
       default: "ACTIVE",
     },
+    // Real model-scored account this demo account stands for (see seed.js ML_MAP).
+    ml_account_id: { type: String, index: true },
+    // Written by the backend after Layer-3 investigations / SOC actions.
+    last_decision: { type: String },
+    last_investigated_at: { type: Date },
+    freeze_reason: { type: String },
+    cleared_by_agent_at: { type: Date }, // agent cleared a Layer-1 false positive
     created_at: { type: Date, default: Date.now },
   },
   { collection: "accounts" }

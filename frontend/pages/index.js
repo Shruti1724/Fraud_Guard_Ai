@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
-import { checkVpa, sendMoney } from "../lib/api";
+import { io } from "socket.io-client";
+import { API_URL, checkVpa, sendMoney, getAccount, getTransactions } from "../lib/api";
 import {
   Signal,
   Wifi,
@@ -89,76 +90,130 @@ const RECENT_CONTACTS = [
 export default function MockUpiApp() {
   // Navigation & Flow State
   const [activeTab, setActiveTab] = useState("home"); // "home" | "history" | "alerts"
-  const [screen, setScreen] = useState("home"); // "home" | "keypad" | "warning" | "pin" | "processing" | "success" | "blocked"
-  
+  const [screen, setScreen] = useState("home"); // "home" | "send" | "keypad" | "warning" | "pin" | "processing" | "success" | "blocked"
+
   // Payment Form Data
-  const [recipient, setRecipient] = useState({ name: "Rajesh Kumar", vpa: "rajesh.kumar77@icici" });
-  const [amountStr, setAmountStr] = useState("95000");
+  const [recipient, setRecipient] = useState({ name: "", vpa: "" });
+  const [upiInputStr, setUpiInputStr] = useState("");
+  const [upiError, setUpiError] = useState("");
+  const [amountStr, setAmountStr] = useState("500");
   const [paymentNote, setPaymentNote] = useState("");
   const [pin, setPin] = useState("");
   
   // Live ML / Defense State
-  const [latency, setLatency] = useState(38);
+  const [latency, setLatency] = useState(null); // real Layer-1 round trip, ms
+  const [outcome, setOutcome] = useState(null); // live verdict for a held payment
+  const [payError, setPayError] = useState("");
+  const [showEvidence, setShowEvidence] = useState(false);
+  const [clockStr, setClockStr] = useState("");
+  const txnRef = useRef(null);
   const [riskData, setRiskData] = useState(null);
   const [lastTxn, setLastTxn] = useState(null);
   const [showBalance, setShowBalance] = useState(true);
   const [processingStep, setProcessingStep] = useState(1);
-  
+  const [accountInfo, setAccountInfo] = useState(null);
+
   // History Filter
   const [historyFilter, setHistoryFilter] = useState("All");
   const [alertsFilter, setAlertsFilter] = useState("All");
 
   // Ledger & Alerts State
-  const [transactions, setTransactions] = useState([
-    { id: "TXN_001", name: "Sharma Kirana Store", vpa: "sharma.kirana.store@hdfcbank", amount: 450, time: "11:34 PM", date: "Today", status: "Success", symbol: "S", bg: "#ede9fe", color: "#7c3aed" },
-    { id: "TXN_002", name: "Rajesh Kumar", vpa: "rajesh.kumar77@icici", amount: 95000, time: "11:22 PM", date: "Today", status: "Blocked", symbol: "R", bg: "#fee2e2", color: "#dc2626" },
-    { id: "TXN_003", name: "quicksplit.hub@paytm", vpa: "quicksplit.hub@paytm", amount: 9900, time: "10:55 PM", date: "Today", status: "Flagged", symbol: "Q", bg: "#fef3c7", color: "#d97706" },
-    { id: "TXN_004", name: "Amazon", vpa: "amazon.pay@apl", amount: 1299, time: "7:14 PM", date: "Today", status: "Success", symbol: "A", bg: "#dcfce7", color: "#16a34a" },
-    { id: "TXN_005", name: "Priya Sharma", vpa: "priya.sharma@okhdfc", amount: 2000, time: "4:32 PM", date: "Today", status: "Success", symbol: "P", bg: "#dbeafe", color: "#2563eb" },
-  ]);
+  const [transactions, setTransactions] = useState([]);
 
-  const [alerts, setAlerts] = useState([
-    {
-      id: "ALT_01",
-      title: "Transaction Blocked",
-      desc: "₹ 95,000 to rajesh.kumar77@icici blocked due to high fraud risk.",
-      caseId: "CASE_001847",
-      time: "11:34 PM",
-      category: "Blocked",
-      icon: "block",
-    },
-    {
-      id: "ALT_02",
-      title: "Smurfing Pattern Detected",
-      desc: "Unusual transaction pattern detected for quicksplit.hub@paytm",
-      time: "10:55 PM",
-      category: "Warnings",
-      icon: "warn",
-    },
-    {
-      id: "ALT_03",
-      title: "Account Verified",
-      desc: "sharma.kirana.store@hdfcbank verified as legitimate merchant.",
-      time: "9:12 PM",
-      category: "Info",
-      icon: "info",
-    },
-    {
-      id: "ALT_04",
-      title: "Multiple Small Transfers",
-      desc: "5 transactions detected in 10 minutes.",
-      time: "7:48 PM",
-      category: "Warnings",
-      icon: "warn",
-    },
-  ]);
+  const [alerts, setAlerts] = useState([]);
 
-  // Jitter latency slightly to look real-time alive
+  const loadAccountData = async () => {
+    try {
+      const acc = await getAccount(SENDER_ACCOUNT_ID);
+      if (acc && acc.account_id) {
+        setAccountInfo(acc);
+      }
+      const txs = await getTransactions(SENDER_ACCOUNT_ID, 20);
+      if (Array.isArray(txs) && txs.length > 0) {
+        setTransactions(
+          txs.map((t) => {
+            const isSender = t.sender_account_id === SENDER_ACCOUNT_ID;
+            const displayVpa = isSender ? (t.receiver_vpa || t.receiver_account_id) : (t.sender_vpa || t.sender_account_id);
+            const rawName = (displayVpa || "Unknown").split("@")[0].replace(/[._]/g, " ");
+            const displayName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+            const dateObj = t.timestamp ? new Date(t.timestamp) : null;
+            const timeStr = dateObj && !isNaN(dateObj) ? dateObj.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "Recent";
+            const isSuccess = t.status === "SUCCESS";
+            const isBlocked = t.status === "BLOCKED";
+            return {
+              id: t.transaction_id || t._id,
+              name: displayName,
+              vpa: displayVpa,
+              amount: t.amount,
+              time: timeStr,
+              date: "Today",
+              status: isSuccess ? "Success" : isBlocked ? "Blocked" : "Flagged",
+              symbol: displayName.charAt(0).toUpperCase(),
+              bg: isSuccess ? "#dcfce7" : isBlocked ? "#fee2e2" : "#fef3c7",
+              color: isSuccess ? "#16a34a" : isBlocked ? "#dc2626" : "#d97706",
+            };
+          })
+        );
+      }
+    } catch (e) {
+      console.warn("loadAccountData error:", e.message);
+    }
+  };
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      setLatency(prev => Math.min(48, Math.max(32, prev + (Math.floor(Math.random() * 5) - 2))));
-    }, 3000);
-    return () => clearInterval(timer);
+    loadAccountData();
+  }, []);
+
+  // Real clock for the status bar
+  useEffect(() => {
+    const tick = () => setClockStr(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false }));
+    tick();
+    const t = setInterval(tick, 15000);
+    return () => clearInterval(t);
+  }, []);
+
+  // A flagged payment is held while the agents investigate. Their verdict arrives here.
+  useEffect(() => {
+    const socket = io(API_URL, { transports: ["websocket", "polling"] });
+
+    socket.on("investigation:completed", (p) => {
+      const mine = txnRef.current;
+      if (!mine || !p.case || p.case.account_id !== mine.receiverId) return;
+      const f = p.case.findings || {};
+      setOutcome((prev) => ({
+        ...(prev || {}),
+        caseId: p.case.case_id,
+        topology: f.topology,
+        rationale: f.rationale,
+        evidence: f.risk_factors && f.risk_factors.length ? f.risk_factors : f.evidence,
+        decisionMs: p.duration_ms,
+        decision: p.decision,
+      }));
+    });
+
+    socket.on("transaction:updated", ({ txn }) => {
+      const mine = txnRef.current;
+      if (!mine || !txn || txn.transaction_id !== mine.id) return;
+      const state = txn.status === "BLOCKED" ? "blocked" : txn.status === "SUCCESS" ? "released" : "escalated";
+      setOutcome((prev) => ({ ...(prev || {}), state }));
+      const when = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      setAlerts((prev) => [
+        {
+          id: `ALT_${Date.now()}`,
+          title: state === "blocked" ? "Transaction Blocked" : state === "released" ? "Payment Released" : "Payment Held for Review",
+          desc: `₹ ${Number(txn.amount).toLocaleString()} to ${txn.receiver_vpa || txn.receiver_account_id} ${state === "blocked" ? "was blocked after investigation." : state === "released" ? "was cleared after review and sent." : "is awaiting an analyst."}`,
+          caseId: txn.case_id,
+          time: when,
+          category: state === "blocked" ? "Blocked" : "Warnings",
+          icon: state === "blocked" ? "block" : "warn",
+        },
+        ...prev,
+      ]);
+      loadAccountData();
+    });
+
+    return () => socket.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Handle Keypad Entry
@@ -178,8 +233,28 @@ export default function MockUpiApp() {
 
   // Select a preset demo scenario
   const handleSelectPreset = (preset) => {
+    setUpiInputStr(preset.vpa);
+    setUpiError("");
     setRecipient({ name: preset.name, vpa: preset.vpa });
     setAmountStr(preset.amount);
+    setScreen("keypad");
+  };
+
+  // Continue from UPI entry — validates the VPA format, builds recipient name, moves to keypad
+  const handleUpiContinue = () => {
+    const vpa = upiInputStr.trim().toLowerCase();
+    if (!vpa) { setUpiError("Please enter a UPI ID"); return; }
+    // Loose validation: must contain @
+    if (!vpa.includes("@")) { setUpiError("Invalid UPI ID — must contain '@' (e.g. name@bank)"); return; }
+    // Derive a display name from the part before @
+    const rawHandle = vpa.split("@")[0].replace(/[._-]/g, " ");
+    const displayName = rawHandle
+      .split(" ")
+      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+    setRecipient({ name: displayName, vpa });
+    setAmountStr("500");
+    setUpiError("");
     setScreen("keypad");
   };
 
@@ -197,8 +272,9 @@ export default function MockUpiApp() {
         device_id: SENDER_DEVICE_ID,
       });
       setRiskData(res);
+      setLatency(res && res.meta ? res.meta.total_ms || res.meta.latency_ms : null);
 
-      if (res && res.is_flagged) {
+      if (res && (res.is_flagged || res.risk_level === "HIGH")) {
         setScreen("warning");
       } else {
         setPin("");
@@ -206,6 +282,7 @@ export default function MockUpiApp() {
       }
     } catch (e) {
       console.error("Predict check error", e);
+      setLatency(null);
       setScreen("pin");
     }
   };
@@ -231,21 +308,25 @@ export default function MockUpiApp() {
   const executePayment = async (confirmDespiteWarning = false) => {
     setScreen("processing");
     setProcessingStep(1);
+    setPayError("");
+    setOutcome(null);
+    setShowEvidence(false);
+    txnRef.current = null;
 
-    // Step 1: Initiating
-    await new Promise(r => setTimeout(r, 600));
+    await new Promise((r) => setTimeout(r, 600));
     setProcessingStep(2);
-
-    // Step 2: Verifying beneficiary
-    await new Promise(r => setTimeout(r, 600));
+    await new Promise((r) => setTimeout(r, 600));
     setProcessingStep(3);
-
-    // Step 3: Checking risk
-    await new Promise(r => setTimeout(r, 700));
+    await new Promise((r) => setTimeout(r, 700));
     setProcessingStep(4);
 
-    // Step 4: Bank execution
     const amt = Number(amountStr) || 0;
+    const addHistory = (status, bg, color) =>
+      setTransactions((prev) => [
+        { id: `TXN_${Date.now()}`, name: recipient.name, vpa: recipient.vpa, amount: amt, time: "Just now", date: "Today", status, symbol: recipient.name.charAt(0), bg, color },
+        ...prev,
+      ]);
+
     try {
       const { status: httpStatus, data } = await sendMoney({
         sender_account_id: SENDER_ACCOUNT_ID,
@@ -257,69 +338,87 @@ export default function MockUpiApp() {
 
       setLastTxn(data);
       setProcessingStep(5);
-      await new Promise(r => setTimeout(r, 500));
+      await new Promise((r) => setTimeout(r, 500));
 
-      const isBlockedOrFlagged = data?.txn?.status === "BLOCKED" || data?.txn?.status === "FLAGGED" || (riskData && riskData.is_flagged);
-
-      if (isBlockedOrFlagged) {
-        // Add to blocked history & alerts
-        const newTx = {
-          id: data?.txn?.transaction_id || `TXN_${Date.now()}`,
-          name: recipient.name,
-          vpa: recipient.vpa,
-          amount: amt,
-          time: "Just now",
-          date: "Today",
-          status: "Blocked",
-          symbol: recipient.name.charAt(0),
-          bg: "#fee2e2",
-          color: "#dc2626",
-        };
-        setTransactions(prev => [newTx, ...prev]);
-
-        setAlerts(prev => [
-          {
-            id: `ALT_${Date.now()}`,
-            title: "Transaction Blocked",
-            desc: `₹ ${amt.toLocaleString()} to ${recipient.vpa} blocked due to high fraud risk.`,
-            caseId: data?.case?.case_id || "CASE_001847",
-            time: "Just now",
-            category: "Blocked",
-            icon: "block",
-          },
-          ...prev,
-        ]);
-
+      // Rejected before any money moved: tell the user why, stay on the keypad.
+      if (httpStatus === 422 || httpStatus === 404) {
+        setPayError(data?.message || "This payment could not be processed.");
+        setScreen("keypad");
+        return;
+      }
+      // The recipient's risk changed since the check: show the warning again.
+      if (httpStatus === 409) {
+        setRiskData(data.risk || riskData);
+        setScreen("warning");
+        return;
+      }
+      // Hard block: sender or receiver was frozen by an earlier investigation.
+      if (httpStatus === 403) {
+        setOutcome({ state: "blocked", frozen: true, reason: data?.message, caseId: data?.txn?.case_id || null });
+        addHistory("Blocked", "#fee2e2", "#dc2626");
         setScreen("blocked");
+        setTimeout(() => loadAccountData(), 1500);
+        return;
+      }
+
+      if (data?.txn?.status === "FLAGGED") {
+        // Held while the 4-agent pipeline investigates. The verdict arrives over the socket.
+        txnRef.current = { id: data.txn.transaction_id, receiverId: data.txn.receiver_account_id };
+        setOutcome({ state: "reviewing", ref: data.investigation?.ref });
+        addHistory("Flagged", "#fef3c7", "#d97706");
+        setScreen("blocked");
+        setTimeout(() => loadAccountData(), 1500);
       } else {
-        // Successful transfer
-        const newTx = {
-          id: data?.txn?.transaction_id || `TXN_${Date.now()}`,
-          name: recipient.name,
-          vpa: recipient.vpa,
-          amount: amt,
-          time: "Just now",
-          date: "Today",
-          status: "Success",
-          symbol: recipient.name.charAt(0),
-          bg: "#dcfce7",
-          color: "#16a34a",
-        };
-        setTransactions(prev => [newTx, ...prev]);
+        addHistory("Success", "#dcfce7", "#16a34a");
         setScreen("success");
+        setTimeout(() => loadAccountData(), 1500);
       }
     } catch (err) {
       console.error("Payment error", err);
+      setPayError("Payment failed: " + err.message);
       setScreen("keypad");
-      alert("Payment Error: " + err.message);
     }
   };
+
+  const isCritical = !!(riskData && riskData.is_flagged);
+  const riskPct = Math.round(((riskData && riskData.risk_score) || 0) * 100);
+  const tone = isCritical
+    ? { main: "#dc2626", dark: "#991b1b", soft: "#b91c1c", bg: "#fef2f2", border: "#fee2e2", chip: "#fee2e2" }
+    : { main: "#d97706", dark: "#92400e", soft: "#b45309", bg: "#fffbeb", border: "#fde68a", chip: "#fef3c7" };
 
   return (
     <div style={{ minHeight: "100vh", background: "#05070a", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 10px", fontFamily: "var(--font-sans)" }}>
       <Head>
         <title>FraudGuard AI - Ultra-Realistic Mock UPI Flow</title>
       </Head>
+
+      {/* Floating Link to Admin SOC Dashboard */}
+      <a
+        href="/dashboard"
+        style={{
+          position: "fixed",
+          top: 20,
+          right: 24,
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          background: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
+          color: "#38bdf8",
+          border: "1px solid rgba(56, 189, 248, 0.3)",
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 189, 248, 0.2)",
+          borderRadius: 30,
+          padding: "10px 18px",
+          fontSize: "13px",
+          fontWeight: 700,
+          textDecoration: "none",
+          zIndex: 9999,
+          cursor: "pointer",
+        }}
+      >
+        <Shield size={16} color="#38bdf8" />
+        <span>Admin SOC Dashboard</span>
+        <ArrowRight size={14} color="#38bdf8" />
+      </a>
 
       {/* Main Realistic Phone Frame */}
       <div
@@ -352,9 +451,18 @@ export default function MockUpiApp() {
           }}
         />
 
+        {payError && (
+          <div
+            onClick={() => setPayError("")}
+            style={{ position: "absolute", top: 44, left: 14, right: 14, zIndex: 120, background: "#7f1d1d", color: "#fff", borderRadius: 12, padding: "10px 12px", fontSize: "12px", fontWeight: 600, boxShadow: "0 8px 24px rgba(0,0,0,.35)", cursor: "pointer" }}
+          >
+            {payError}
+          </div>
+        )}
+
         {/* Status Bar */}
         <div style={{ padding: "12px 24px 6px", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "13px", fontWeight: 600, color: screen === "pin" ? "#ffffff" : "#0f172a", zIndex: 90 }}>
-          <span>11:34</span>
+          <span>{clockStr || "--:--"}</span>
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <Signal size={14} />
             <Wifi size={14} />
@@ -382,7 +490,7 @@ export default function MockUpiApp() {
             AI Fraud Shield Active
           </div>
           <span style={{ fontSize: "11px", fontWeight: 600, color: "#10b981", fontFamily: "monospace" }}>
-            Latency: {latency}ms
+            Layer-1: {latency != null ? `${latency}ms` : "n/a"}
           </span>
         </div>
 
@@ -405,11 +513,11 @@ export default function MockUpiApp() {
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                     <div style={{ width: 42, height: 42, borderRadius: "50%", background: "#e0e7ff", color: "#3730a3", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "16px" }}>
-                      K
+                      {(accountInfo?.name || "Kosada").charAt(0).toUpperCase()}
                     </div>
                     <div>
                       <p style={{ margin: 0, fontSize: "11px", color: "#64748b" }}>Good Evening,</p>
-                      <h3 style={{ margin: 0, fontSize: "15px", fontWeight: 700, color: "#0f172a" }}>Kosada</h3>
+                      <h3 style={{ margin: 0, fontSize: "15px", fontWeight: 700, color: "#0f172a" }}>{accountInfo?.name || "Kosada"}</h3>
                     </div>
                   </div>
                   <div style={{ position: "relative", padding: 8, borderRadius: "50%", background: "#f8fafc", border: "1px solid #e2e8f0" }}>
@@ -427,14 +535,14 @@ export default function MockUpiApp() {
                     </button>
                   </div>
                   <h1 style={{ margin: 0, fontSize: "28px", fontWeight: 800, color: "#0f172a", letterSpacing: "-0.5px" }}>
-                    {showBalance ? "₹ 45,290" : "••••••"}
+                    {showBalance ? (accountInfo?.balance !== undefined ? `₹ ${Number(accountInfo.balance).toLocaleString("en-IN")}` : "Loading...") : "••••••"}
                   </h1>
                   <p style={{ margin: "4px 0 16px", fontSize: "10px", color: "#94a3b8" }}>
-                    Last updated 11:34 PM
+                    {accountInfo ? "Live • MongoDB Atlas" : "Syncing balance..."}
                   </p>
                   <div style={{ display: "flex", gap: 10 }}>
                     <button
-                      onClick={() => { setRecipient({ name: "Rajesh Kumar", vpa: "rajesh.kumar77@icici" }); setAmountStr("95000"); setScreen("keypad"); }}
+                      onClick={() => { setUpiInputStr(""); setUpiError(""); setScreen("send"); }}
                       style={{ flex: 1, background: "#2563eb", color: "#fff", border: "none", borderRadius: 12, padding: "10px", fontWeight: 600, fontSize: "13px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, cursor: "pointer" }}
                     >
                       <Send size={14} /> Send Money
@@ -502,7 +610,7 @@ export default function MockUpiApp() {
                     {RECENT_CONTACTS.map((c, i) => (
                       <div
                         key={i}
-                        onClick={() => { setRecipient({ name: c.name, vpa: c.vpa }); setAmountStr("1000"); setScreen("keypad"); }}
+                        onClick={() => { setUpiInputStr(c.vpa); setUpiError(""); setRecipient({ name: c.name, vpa: c.vpa }); setAmountStr("1000"); setScreen("keypad"); }}
                         style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer" }}
                       >
                         <div style={{ width: 46, height: 46, borderRadius: "50%", background: c.bg, color: c.color, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "14px" }}>
@@ -512,6 +620,118 @@ export default function MockUpiApp() {
                       </div>
                     ))}
                   </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* ========================================================= */}
+            {/* SCREEN 1b: ENTER UPI ID                                   */}
+            {/* ========================================================= */}
+            {screen === "send" && (
+              <motion.div
+                key="send_screen"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                style={{ flex: 1, display: "flex", flexDirection: "column", padding: "0 18px 18px" }}
+              >
+                {/* Header */}
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+                  <button onClick={() => setScreen("home")} style={{ background: "transparent", border: "none", cursor: "pointer", color: "#0f172a" }}>
+                    <ChevronLeft size={22} />
+                  </button>
+                  <h3 style={{ margin: 0, fontSize: "16px", fontWeight: 700, flex: 1, textAlign: "center", marginRight: 22 }}>Enter UPI ID</h3>
+                </div>
+
+                {/* UPI Input Box */}
+                <div style={{ marginBottom: 14 }}>
+                  <label style={{ fontSize: "12px", fontWeight: 600, color: "#64748b", display: "block", marginBottom: 6 }}>Pay to UPI ID / VPA</label>
+                  <div style={{ position: "relative" }}>
+                    <input
+                      autoFocus
+                      type="text"
+                      value={upiInputStr}
+                      onChange={(e) => { setUpiInputStr(e.target.value); setUpiError(""); }}
+                      placeholder="example@oksbi"
+                      style={{
+                        width: "100%",
+                        boxSizing: "border-box",
+                        padding: "13px 40px 13px 14px",
+                        border: `1.5px solid ${upiError ? "#ef4444" : "#cbd5e1"}`,
+                        borderRadius: 12,
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        color: "#0f172a",
+                        background: "#f8fafc",
+                        outline: "none",
+                        transition: "border-color 0.2s",
+                      }}
+                      onFocus={e => e.target.style.borderColor = "#2563eb"}
+                      onBlur={e => e.target.style.borderColor = upiError ? "#ef4444" : "#cbd5e1"}
+                      onKeyDown={(e) => { if (e.key === "Enter") handleUpiContinue(); }}
+                    />
+                    {upiInputStr && (
+                      <button
+                        onClick={() => { setUpiInputStr(""); setUpiError(""); }}
+                        style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", background: "transparent", border: "none", cursor: "pointer", color: "#94a3b8", fontSize: "18px", lineHeight: 1 }}
+                      >
+                        ×
+                      </button>
+                    )}
+                  </div>
+                  {upiError && <p style={{ margin: "6px 0 0", fontSize: "12px", color: "#ef4444", fontWeight: 500 }}>{upiError}</p>}
+                </div>
+
+                {/* Demo VPA Suggestions */}
+                <div style={{ marginBottom: 20 }}>
+                  <p style={{ margin: "0 0 10px", fontSize: "12px", fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.5px" }}>Or pick a demo scenario</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {[
+                      { label: "🔴 Mule Chain (FROZEN)", vpa: "mule.relay99@oksbi", badge: "Auto-Blocked", badgeColor: "#ef4444", badgeBg: "#fee2e2" },
+                      { label: "🟡 Smurfing Hub (FROZEN)", vpa: "quicksplit.hub@paytm", badge: "Auto-Blocked", badgeColor: "#ef4444", badgeBg: "#fee2e2" },
+                      { label: "🟠 ATO Device (Under Investigation)", vpa: "rajesh.kumar77@icici", badge: "Escalated", badgeColor: "#f59e0b", badgeBg: "#fef3c7" },
+                      { label: "🟠 Offshore Hawala (Under Investigation)", vpa: "dubai.remit.express@emirates", badge: "Escalated", badgeColor: "#f59e0b", badgeBg: "#fef3c7" },
+                      { label: "✅ Verified Merchant", vpa: "sharma.kirana.store@hdfcbank", badge: "Cleared", badgeColor: "#10b981", badgeBg: "#dcfce7" },
+                      { label: "✅ Rohit Mehta (Safe)", vpa: "rohit.mehta@oksbi", badge: "Safe", badgeColor: "#10b981", badgeBg: "#dcfce7" },
+                    ].map((s) => (
+                      <div
+                        key={s.vpa}
+                        onClick={() => { setUpiInputStr(s.vpa); setUpiError(""); }}
+                        style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 12px", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 12, cursor: "pointer", transition: "border-color 0.15s" }}
+                        onMouseEnter={e => e.currentTarget.style.borderColor = "#2563eb"}
+                        onMouseLeave={e => e.currentTarget.style.borderColor = "#e2e8f0"}
+                      >
+                        <div>
+                          <div style={{ fontSize: "13px", fontWeight: 600, color: "#0f172a" }}>{s.label}</div>
+                          <div style={{ fontSize: "11px", color: "#64748b", marginTop: 2 }}>{s.vpa}</div>
+                        </div>
+                        <span style={{ fontSize: "10px", fontWeight: 700, color: s.badgeColor, background: s.badgeBg, padding: "3px 8px", borderRadius: 20, whiteSpace: "nowrap" }}>{s.badge}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Continue Button */}
+                <div style={{ marginTop: "auto" }}>
+                  <button
+                    onClick={handleUpiContinue}
+                    disabled={!upiInputStr.trim()}
+                    style={{
+                      width: "100%",
+                      background: upiInputStr.trim() ? "#2563eb" : "#cbd5e1",
+                      color: "#ffffff",
+                      border: "none",
+                      borderRadius: 14,
+                      padding: "14px",
+                      fontSize: "15px",
+                      fontWeight: 700,
+                      cursor: upiInputStr.trim() ? "pointer" : "not-allowed",
+                      boxShadow: upiInputStr.trim() ? "0 4px 12px rgba(37, 99, 235, 0.3)" : "none",
+                      transition: "all 0.2s",
+                    }}
+                  >
+                    Continue →
+                  </button>
                 </div>
               </motion.div>
             )}
@@ -546,7 +766,12 @@ export default function MockUpiApp() {
                       <div style={{ fontSize: "11px", color: "#64748b" }}>{recipient.vpa}</div>
                     </div>
                   </div>
-                  <Edit2 size={16} color="#64748b" style={{ cursor: "pointer" }} />
+                  <button
+                    onClick={() => { setUpiInputStr(recipient.vpa || ""); setUpiError(""); setScreen("send"); }}
+                    style={{ background: "transparent", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: 4, color: "#2563eb", fontSize: "12px", fontWeight: 600 }}
+                  >
+                    <Edit2 size={14} /> Change
+                  </button>
                 </div>
 
                 {/* Big Amount Display */}
@@ -663,12 +888,12 @@ export default function MockUpiApp() {
                 </div>
 
                 {/* Red High Risk Alert Header */}
-                <div style={{ background: "#fef2f2", border: "1px solid #fee2e2", borderRadius: 14, padding: "14px", marginBottom: 14, display: "flex", gap: 10, alignItems: "flex-start" }}>
-                  <AlertTriangle size={20} color="#dc2626" style={{ flexShrink: 0, marginTop: 2 }} />
+                <div style={{ background: tone.bg, border: "1px solid " + tone.border, borderRadius: 14, padding: "14px", marginBottom: 14, display: "flex", gap: 10, alignItems: "flex-start" }}>
+                  <AlertTriangle size={20} color={tone.main} style={{ flexShrink: 0, marginTop: 2 }} />
                   <div>
-                    <h4 style={{ margin: "0 0 2px", fontSize: "13px", fontWeight: 700, color: "#991b1b" }}>High Fraud Risk Detected</h4>
-                    <p style={{ margin: 0, fontSize: "11px", color: "#b91c1c", lineHeight: 1.4 }}>
-                      This account shows suspicious activity patterns based on our AI analysis.
+                    <h4 style={{ margin: "0 0 2px", fontSize: "13px", fontWeight: 700, color: tone.dark }}>{isCritical ? "High Fraud Risk Detected" : "Caution: Elevated Risk"}</h4>
+                    <p style={{ margin: 0, fontSize: "11px", color: tone.soft, lineHeight: 1.4 }}>
+                      {(riskData && riskData.warning_message) || "This account shows suspicious activity patterns based on our AI analysis."}
                     </p>
                   </div>
                 </div>
@@ -677,7 +902,7 @@ export default function MockUpiApp() {
                 <div style={{ background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: 14, padding: "14px", marginBottom: 12 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                     <span style={{ fontSize: "11px", fontWeight: 600, color: "#64748b" }}>Risk Score</span>
-                    <span style={{ fontSize: "13px", fontWeight: 800, color: "#dc2626" }}>96%</span>
+                    <span style={{ fontSize: "13px", fontWeight: 800, color: tone.main }}>{riskPct}%</span>
                   </div>
                   {/* Red Audio Bar Visualizer */}
                   <div style={{ display: "flex", gap: 3, height: 16, alignItems: "center" }}>
@@ -686,8 +911,8 @@ export default function MockUpiApp() {
                         key={i}
                         style={{
                           flex: 1,
-                          height: i < 16 ? "100%" : "30%",
-                          background: i < 16 ? "linear-gradient(to top, #ef4444, #dc2626)" : "#e2e8f0",
+                          height: i < Math.max(1, Math.round((riskPct / 100) * 18)) ? "100%" : "30%",
+                          background: i < Math.max(1, Math.round((riskPct / 100) * 18)) ? `linear-gradient(to top, ${tone.main}, ${tone.dark})` : "#e2e8f0",
                           borderRadius: 2,
                         }}
                       />
@@ -697,15 +922,18 @@ export default function MockUpiApp() {
 
                 {/* Identified Pattern Card */}
                 <div style={{ background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: 14, padding: "12px", marginBottom: 12 }}>
-                  <span style={{ fontSize: "11px", fontWeight: 600, color: "#64748b", display: "block", marginBottom: 6 }}>Identified Pattern</span>
+                  <span style={{ fontSize: "11px", fontWeight: 600, color: "#64748b", display: "block", marginBottom: 6 }}>Model assessment</span>
                   <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
-                    <div style={{ padding: 6, borderRadius: 8, background: "#fee2e2", color: "#dc2626" }}>
+                    <div style={{ padding: 6, borderRadius: 8, background: tone.chip, color: tone.main }}>
                       <ShieldAlert size={16} />
                     </div>
                     <div>
-                      <div style={{ fontSize: "12px", fontWeight: 700, color: "#0f172a" }}>Rapid pass-through mule</div>
+                      <div style={{ fontSize: "12px", fontWeight: 700, color: "#0f172a" }}>{isCritical ? "Flagged above the 0.85 threshold" : "Elevated, below the block threshold"}</div>
                       <div style={{ fontSize: "10px", color: "#64748b", lineHeight: 1.3 }}>
-                        This account is part of a high-velocity fund movement network.
+                        {riskData && riskData.model_scores
+                          ? `Tabular model ${riskData.model_scores.xgb.toFixed(2)} · network model ${riskData.model_scores.sage.toFixed(2)}`
+                          : `Scored by ${(riskData && riskData.meta && riskData.meta.source) || "the risk engine"}`}
+                        {isCritical ? ". Our AI agents will review this payment if you continue." : ""}
                       </div>
                     </div>
                   </div>
@@ -713,21 +941,21 @@ export default function MockUpiApp() {
 
                 {/* Recommendation */}
                 <div style={{ marginBottom: 16, display: "flex", gap: 6, alignItems: "center" }}>
-                  <AlertTriangle size={14} color="#dc2626" />
-                  <span style={{ fontSize: "11px", fontWeight: 600, color: "#b91c1c" }}>Recommendation: Do not proceed with this payment.</span>
+                  <AlertTriangle size={14} color={tone.main} />
+                  <span style={{ fontSize: "11px", fontWeight: 600, color: tone.soft }}>{isCritical ? "Recommendation: Do not proceed with this payment." : "Recommendation: Continue only if you know this person."}</span>
                 </div>
 
                 {/* Action Buttons */}
                 <div style={{ display: "flex", gap: 10, marginTop: "auto" }}>
                   <button
                     onClick={() => setScreen("home")}
-                    style={{ flex: 1, background: "#ffffff", color: "#dc2626", border: "1px solid #fca5a5", borderRadius: 12, padding: "12px", fontWeight: 700, fontSize: "12px", cursor: "pointer" }}
+                    style={{ flex: 1, background: "#ffffff", color: tone.main, border: "1px solid " + tone.border, borderRadius: 12, padding: "12px", fontWeight: 700, fontSize: "12px", cursor: "pointer" }}
                   >
                     Cancel Payment
                   </button>
                   <button
                     onClick={() => { setPin(""); setScreen("pin"); }}
-                    style={{ flex: 1, background: "#dc2626", color: "#ffffff", border: "none", borderRadius: 12, padding: "12px", fontWeight: 700, fontSize: "12px", cursor: "pointer" }}
+                    style={{ flex: 1, background: tone.main, color: "#ffffff", border: "none", borderRadius: 12, padding: "12px", fontWeight: 700, fontSize: "12px", cursor: "pointer" }}
                   >
                     Proceed Anyway <br /><span style={{ fontSize: "9px", opacity: 0.9 }}>(I know this person)</span>
                   </button>
@@ -931,7 +1159,7 @@ export default function MockUpiApp() {
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span style={{ fontSize: "12px", color: "#64748b" }}>Date & Time</span>
-                    <span style={{ fontSize: "11px", color: "#0f172a" }}>11 Sep 2026, 11:34 PM</span>
+                    <span style={{ fontSize: "11px", color: "#0f172a" }}>{new Date().toLocaleString()}</span>
                   </div>
                 </div>
 
@@ -956,77 +1184,97 @@ export default function MockUpiApp() {
             {/* ========================================================= */}
             {/* SCREEN 7: TRANSACTION STOPPED / BLOCKED RECEIPT           */}
             {/* ========================================================= */}
-            {screen === "blocked" && (
-              <motion.div
-                key="blocked_screen"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "0 20px", textAlign: "center" }}
-              >
-                {/* Red Shield Warning */}
-                <div style={{ width: 68, height: 68, borderRadius: "50%", background: "#fee2e2", color: "#dc2626", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
-                  <ShieldAlert size={34} />
+            {screen === "blocked" && (() => {
+              const oc = outcome || { state: "blocked" };
+              const tones = {
+                reviewing: { c: "#d97706", bg: "#fef3c7", title: "Payment On Hold", sub: "FraudGuard AI is reviewing this payment", Icon: Clock },
+                blocked: { c: "#dc2626", bg: "#fee2e2", title: "Transaction Stopped", sub: "AI Fraud Engine Intervention", Icon: ShieldAlert },
+                released: { c: "#16a34a", bg: "#dcfce7", title: "Payment Released", sub: "Review complete: this recipient was verified", Icon: CheckCircle },
+                escalated: { c: "#d97706", bg: "#fef3c7", title: "Held for Manual Review", sub: "A fraud analyst will review this payment", Icon: Clock },
+              };
+              const t = tones[oc.state] || tones.blocked;
+              const Icon = t.Icon;
+              const reviewing = oc.state === "reviewing";
+              const reason = reviewing
+                ? "Agents are investigating..."
+                : oc.topology || oc.reason || (oc.state === "released" ? "Cleared as a false alarm" : "Flagged by the fraud model");
+              const row = (k, v, extra) => (
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8, gap: 10 }}>
+                  <span style={{ fontSize: "11px", color: "#64748b" }}>{k}</span>
+                  <span style={{ fontSize: "11px", fontWeight: 600, color: "#0f172a", textAlign: "right", ...extra }}>{v}</span>
                 </div>
-
-                <h2 style={{ margin: "0 0 2px", fontSize: "17px", fontWeight: 800, color: "#dc2626" }}>Transaction Stopped</h2>
-                <p style={{ margin: "0 0 18px", fontSize: "11px", color: "#64748b" }}>AI Fraud Engine Intervention</p>
-
-                {/* Blocked Dossier Card */}
-                <div style={{ width: "100%", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 14, padding: "14px", textAlign: "left", marginBottom: 18 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                    <span style={{ fontSize: "11px", color: "#64748b" }}>Amount</span>
-                    <span style={{ fontSize: "13px", fontWeight: 800, color: "#0f172a" }}>₹ {Number(amountStr || 95000).toLocaleString()}</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                    <span style={{ fontSize: "11px", color: "#64748b" }}>To</span>
-                    <div style={{ textAlign: "right" }}>
-                      <div style={{ fontSize: "12px", fontWeight: 700, color: "#0f172a" }}>{recipient.name}</div>
-                      <div style={{ fontSize: "10px", color: "#64748b" }}>{recipient.vpa}</div>
-                    </div>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                    <span style={{ fontSize: "11px", color: "#64748b" }}>Risk Score</span>
-                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#dc2626" }}>96% (High Risk)</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                    <span style={{ fontSize: "11px", color: "#64748b" }}>Reason</span>
-                    <span style={{ fontSize: "11px", fontWeight: 600, color: "#0f172a" }}>Rapid Pass-Through Mule Network</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                    <span style={{ fontSize: "11px", color: "#64748b" }}>Case ID</span>
-                    <span style={{ fontSize: "11px", fontWeight: 600, color: "#0f172a", fontFamily: "monospace" }}>CASE_001847</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontSize: "11px", color: "#64748b" }}>Time</span>
-                    <span style={{ fontSize: "11px", color: "#0f172a" }}>11 Sep 2026, 11:34 PM</span>
-                  </div>
-                </div>
-
-                {/* Blocked Action Buttons */}
-                <div style={{ width: "100%", display: "flex", gap: 8, marginBottom: 8 }}>
-                  <button
-                    onClick={() => alert("Evidence: Inflow surge ₹97k across 2 victims within 4 mins of creation. Shared device DEV_ANDROID_9921_MULE.")}
-                    style={{ flex: 1, background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: 10, padding: "10px", fontSize: "11px", fontWeight: 600, color: "#0f172a", cursor: "pointer" }}
-                  >
-                    View Evidence
-                  </button>
-                  <button
-                    onClick={() => alert("SAR Dossier Generated for Case CASE_001847")}
-                    style={{ flex: 1, background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: 10, padding: "10px", fontSize: "11px", fontWeight: 600, color: "#0f172a", cursor: "pointer" }}
-                  >
-                    Generate Report
-                  </button>
-                </div>
-
-                <button
-                  onClick={() => setScreen("home")}
-                  style={{ width: "100%", background: "#2563eb", border: "none", borderRadius: 10, padding: "12px", fontSize: "13px", fontWeight: 700, color: "#ffffff", cursor: "pointer" }}
+              );
+              return (
+                <motion.div
+                  key="blocked_screen"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "0 20px", textAlign: "center", overflowY: "auto" }}
                 >
-                  Return Home
-                </button>
-              </motion.div>
-            )}
+                  <div style={{ width: 68, height: 68, borderRadius: "50%", background: t.bg, color: t.c, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
+                    <motion.div animate={reviewing ? { rotate: 360 } : { rotate: 0 }} transition={reviewing ? { repeat: Infinity, duration: 2.4, ease: "linear" } : { duration: 0.3 }}>
+                      <Icon size={34} />
+                    </motion.div>
+                  </div>
+
+                  <h2 style={{ margin: "0 0 2px", fontSize: "17px", fontWeight: 800, color: t.c }}>{t.title}</h2>
+                  <p style={{ margin: "0 0 18px", fontSize: "11px", color: "#64748b" }}>{t.sub}</p>
+
+                  <div style={{ width: "100%", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 14, padding: "14px", textAlign: "left", marginBottom: 14 }}>
+                    {row("Amount", `₹ ${Number(amountStr || 0).toLocaleString()}`, { fontSize: "13px", fontWeight: 800 })}
+                    {row("To", <span>{recipient.name}<br /><span style={{ fontSize: "10px", color: "#64748b", fontWeight: 400 }}>{recipient.vpa}</span></span>)}
+                    {riskData && row("Risk Score", `${riskPct}% (${riskData.risk_level})`, { color: t.c, fontWeight: 700 })}
+                    {row("Reason", reason)}
+                    {row("Case ID", oc.caseId || (reviewing ? "Opening case..." : "n/a"), { fontFamily: "monospace" })}
+                    {oc.decisionMs ? row("Decided in", `${(oc.decisionMs / 1000).toFixed(1)}s by AI agents`) : null}
+                    {row("Time", new Date().toLocaleString())}
+                  </div>
+
+                  {oc.rationale && (
+                    <div style={{ width: "100%", background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: "10px 12px", textAlign: "left", fontSize: "11px", color: "#334155", lineHeight: 1.5, marginBottom: 12 }}>
+                      <b style={{ color: "#0f172a" }}>Why:</b> {oc.rationale}
+                    </div>
+                  )}
+                  {reviewing && (
+                    <p style={{ margin: "0 0 12px", fontSize: "11px", color: "#64748b", lineHeight: 1.5 }}>
+                      Your money has not left your account. This screen updates the moment the review finishes.
+                    </p>
+                  )}
+
+                  {showEvidence && oc.evidence && oc.evidence.length > 0 && (
+                    <div style={{ width: "100%", background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: "10px 12px", textAlign: "left", fontSize: "11px", color: "#334155", lineHeight: 1.5, marginBottom: 10 }}>
+                      {oc.evidence.map((e, i) => <div key={i} style={{ marginBottom: 3 }}>• {e}</div>)}
+                    </div>
+                  )}
+
+                  <div style={{ width: "100%", display: "flex", gap: 8, marginBottom: 8 }}>
+                    <button
+                      disabled={!oc.evidence || oc.evidence.length === 0}
+                      onClick={() => setShowEvidence((v) => !v)}
+                      style={{ flex: 1, background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: 10, padding: "10px", fontSize: "11px", fontWeight: 600, color: "#0f172a", cursor: "pointer", opacity: oc.evidence && oc.evidence.length ? 1 : 0.5 }}
+                    >
+                      {showEvidence ? "Hide Evidence" : "View Evidence"}
+                    </button>
+                    <a
+                      href="/dashboard"
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ flex: 1, background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: 10, padding: "10px", fontSize: "11px", fontWeight: 600, color: "#0f172a", textDecoration: "none", textAlign: "center" }}
+                    >
+                      Open in SOC
+                    </a>
+                  </div>
+
+                  <button
+                    onClick={() => { setOutcome(null); txnRef.current = null; setScreen("home"); }}
+                    style={{ width: "100%", background: "#2563eb", border: "none", borderRadius: 10, padding: "12px", fontSize: "13px", fontWeight: 700, color: "#ffffff", cursor: "pointer" }}
+                  >
+                    Return Home
+                  </button>
+                </motion.div>
+              );
+            })()}
 
             {/* ========================================================= */}
             {/* SCREEN 8: TRANSACTION HISTORY                             */}

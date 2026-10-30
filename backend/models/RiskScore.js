@@ -16,6 +16,10 @@ const riskScoreSchema = new mongoose.Schema(
     is_flagged: { type: Boolean, required: true },
     warning_message: { type: String, required: true },
     model_version: { type: String, default: "agent-service-v1" },
+    latency_ms: { type: Number },
+    xgb_score: { type: Number },   // tabular model
+    sage_score: { type: Number },  // GraphSAGE
+    ml_account_id: { type: String },
     topological_flags: { type: [String], default: [] },
     updated_at: { type: Date, default: Date.now },
   },

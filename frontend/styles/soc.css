@@ -1,0 +1,42 @@
+/* FraudGuard SOC Command Center. Everything is scoped under .soc-root */
+.soc-root { font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; color: #e8eefb; background: #04060c; -webkit-font-smoothing: antialiased; }
+.soc-root *, .soc-root *::before, .soc-root *::after { box-sizing: border-box; }
+.soc-mono { font-family: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; }
+
+@keyframes socPulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes socSlide { from { transform: translateY(-8px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes socFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes socSpin { to { transform: rotate(360deg); } }
+@keyframes socScan { 0% { transform: translateX(-100%); } 100% { transform: translateX(260%); } }
+@keyframes socRise { from { transform: translateY(14px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.soc-slide { animation: socSlide .28s ease-out both; }
+.soc-rise { animation: socRise .35s cubic-bezier(.2,.8,.2,1) both; }
+.soc-blink { animation: socPulse 1.2s ease-in-out infinite; }
+.soc-spin { animation: socSpin 1s linear infinite; }
+
+.soc-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(130,160,210,.25) transparent; }
+.soc-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.soc-scroll::-webkit-scrollbar-thumb { background: rgba(130,160,210,.25); border-radius: 6px; }
+
+.soc-btn { cursor: pointer; transition: transform .12s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease, opacity .15s ease; }
+.soc-btn:hover:not(:disabled) { transform: translateY(-1px); border-color: rgba(56,216,255,.55) !important; box-shadow: 0 6px 20px -8px rgba(56,216,255,.45); }
+.soc-btn:active:not(:disabled) { transform: translateY(0); }
+.soc-btn:disabled { cursor: not-allowed; opacity: .45; }
+
+.soc-card { background: rgba(11,16,28,.78); border: 1px solid rgba(130,160,210,.16); border-radius: 14px; backdrop-filter: blur(14px); }
+.soc-row-hover { transition: background .15s ease; }
+.soc-row-hover:hover { background: rgba(255,255,255,.04); }
+
+/* three.js / force-graph tooltips */
+.scene-tooltip { background: transparent !important; padding: 0 !important; }
+.soc-tip { background: rgba(7,11,20,.94); border: 1px solid rgba(130,160,210,.28); border-radius: 10px; padding: 9px 11px; color: #e8eefb; font-size: 12px; line-height: 1.4; box-shadow: 0 12px 40px rgba(0,0,0,.55); backdrop-filter: blur(10px); }
+
+.soc-shimmer { position: relative; overflow: hidden; }
+.soc-shimmer::after { content: ""; position: absolute; inset: 0; width: 40%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent); animation: socScan 1.6s linear infinite; }
+
+@media print {
+  body * { visibility: hidden !important; }
+  .soc-print, .soc-print * { visibility: visible !important; }
+  .soc-print { position: absolute; inset: 0; background: #fff !important; color: #111 !important; padding: 28px; }
+}

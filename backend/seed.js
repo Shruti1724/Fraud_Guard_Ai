@@ -6,6 +6,9 @@ const Transaction = require("./models/Transaction");
 const InvestigationCase = require("./models/InvestigationCase");
 const AuditAction = require("./models/AuditAction");
 const mongoose = require("mongoose");
+const fs = require("fs");
+const path = require("path");
+const readline = require("readline");
 
 const accounts = [
   // User / Sender
@@ -15,7 +18,7 @@ const accounts = [
     account_holder_name: "You (Demo Sender)",
     account_age_days: 320,
     kyc_status: "FULL_BIOMETRIC_VERIFIED",
-    current_balance: 75000,
+    current_balance: 250000,
     avg_tx_amount: 2500,
     tx_frequency_per_day: 4,
     unique_counterparties: 12,
@@ -659,8 +662,130 @@ const initialCases = [
   },
 ];
 
-async function seed() {
-  await connectDB();
+// ─── Innocent look-alikes (the false positives Layer 3 exists to clear) ──────
+// Same identities the agent service already knows (agent-service/data/mock_accounts.json).
+const decoyAccounts = [
+  { account_id: "acc_decoy_payroll_04", vpa_address: "apex.tech.salaries@hdfcbank", account_holder_name: "Apex Tech Payroll", account_age_days: 1100, kyc_status: "FULL_BIOMETRIC_VERIFIED", current_balance: 450000, avg_tx_amount: 55000, tx_frequency_per_day: 20, unique_counterparties: 25, device_id: "DEV_CORP_FINANCE_SERVER", ip_address: "122.161.40.10", risk_status: "ACTIVE" },
+  { account_id: "acc_decoy_forward_02", vpa_address: "vikram.roommate@paytm", account_holder_name: "Vikram (Flatmate)", account_age_days: 730, kyc_status: "FULL_BIOMETRIC_VERIFIED", current_balance: 22000, avg_tx_amount: 12000, tx_frequency_per_day: 0.8, unique_counterparties: 5, device_id: "DEV_ONEPLUS_PERSONAL", ip_address: "122.161.99.30", risk_status: "ACTIVE" },
+  { account_id: "acc_decoy_family_01", vpa_address: "anita.family@oksbi", account_holder_name: "Anita (Family Account)", account_age_days: 1280, kyc_status: "FULL_BIOMETRIC_VERIFIED", current_balance: 34000, avg_tx_amount: 3200, tx_frequency_per_day: 0.5, unique_counterparties: 4, device_id: "DEV_IPHONE_FAMILY_MOM", ip_address: "49.36.12.80", risk_status: "ACTIVE" },
+  { account_id: "acc_decoy_merchant_03", vpa_address: "gupta.sweets.express@icici", account_holder_name: "Gupta Sweets (Merchant Hub)", account_age_days: 950, kyc_status: "FULL_BIOMETRIC_VERIFIED", current_balance: 85000, avg_tx_amount: 480, tx_frequency_per_day: 65, unique_counterparties: 280, device_id: "DEV_BILLING_DESK_GUPTA", ip_address: "103.21.144.5", risk_status: "ACTIVE" },
+];
+const decoyTransactions = [
+  ["tx_decoy_01", "acc_decoy_payroll_04", "C_CUSTOMER_01", "ananya.verma@okaxis", 62000, 50],
+  ["tx_decoy_02", "acc_decoy_payroll_04", "C_CUSTOMER_02", "rohit.mehta@oksbi", 58000, 49],
+  ["tx_decoy_03", "acc_decoy_payroll_04", "C_CUSTOMER_03", "deepak.singh@paytm", 55000, 48],
+  ["tx_decoy_04", "C_CUSTOMER_03", "acc_decoy_forward_02", "vikram.roommate@paytm", 14500, 47],
+  ["tx_decoy_05", "acc_decoy_forward_02", "C_CUSTOMER_02", "rohit.mehta@oksbi", 29000, 46],
+  ["tx_decoy_06", "C_CUSTOMER_02", "acc_decoy_family_01", "anita.family@oksbi", 4000, 44],
+  ["tx_decoy_07", "acc_decoy_family_01", "C_CUSTOMER_01", "ananya.verma@okaxis", 2500, 43],
+  ["tx_decoy_08", "C_CUSTOMER_01", "acc_decoy_merchant_03", "gupta.sweets.express@icici", 320, 42],
+  ["tx_decoy_09", "C_CUSTOMER_03", "acc_decoy_merchant_03", "gupta.sweets.express@icici", 540, 41],
+  ["tx_decoy_10", "acc_user_101", "acc_decoy_merchant_03", "gupta.sweets.express@icici", 780, 40],
+].map(([transaction_id, sender_account_id, receiver_account_id, receiver_vpa, amount, minsAgo]) => ({
+  transaction_id, sender_account_id, receiver_account_id, receiver_vpa, amount,
+  status: "SUCCESS", type: "PAYMENT", timestamp: new Date(Date.now() - 1000 * 60 * minsAgo),
+  is_fraud: false, is_synthetic_ring: false,
+}));
+
+// ─── ML bridge ────────────────────────────────────────────────────────────────
+// Each demo account stands for a REAL account scored by the trained XGBoost + GraphSAGE
+// models (ml-service/artifacts/blended_scores.csv). /predict sends the ML service that
+// ID, so the dashboard shows genuine model output. Topology and profiles are the demo's.
+const ML_MAP = {
+  acc_user_101: "C1000036340",
+  C_CUSTOMER_01: "acc_merchant_customer_024_10",
+  C_CUSTOMER_02: "acc_merchant_customer_021_23",
+  C_CUSTOMER_03: "acc_merchant_customer_036_16",
+  C_VICTIM_881: "acc_star_victim_042_3",
+  C_VICTIM_902: "acc_star_victim_042_4",
+  acc_mule_chain_01: "acc_chain_016_4",
+  acc_aggregator_sink_09: "acc_fanout_sink_110_0",
+  acc_source_syndicate: "acc_fanout_collector_109_0",
+  acc_star_burst_02: "acc_star_final_042_0",
+  acc_leaf_node_01: "acc_star_mule_042_0",
+  acc_leaf_node_02: "acc_star_mule_049_0",
+  acc_leaf_node_03: "acc_star_mule_052_0",
+  acc_suspicious_device_04: "C1001129353",
+  acc_crypto_p2p_desk: "acc_cycle_sink_089_0",
+  acc_overseas_remit: "acc_hybrid_final_149_3",
+  acc_legit_retail_03: "M1000004668",
+  acc_decoy_payroll_04: "acc_employee_075_9",   // real decoy, flagged 0.909
+  acc_decoy_forward_02: "acc_forward_094_1",    // real decoy, flagged 0.986
+  acc_decoy_family_01: "acc_family_173_1",      // real decoy, warning band 0.748
+  acc_decoy_merchant_03: "acc_merchant_006_0",  // real decoy, warning band 0.792
+};
+
+const ML_SCORES_CSV = process.env.ML_SCORES_CSV || path.join(__dirname, "..", "ml-service", "artifacts", "blended_scores.csv");
+const FLAG = 0.85;
+const WARN = 0.7;
+const MSG = {
+  CRITICAL: "CRITICAL RISK: This receiver UPI ID was flagged in a mule-chain fraud ring. Payments to this account are restricted.",
+  HIGH: "WARNING: Recipient account flagged for suspicious transaction velocity.",
+  LOW: "Account verified. Safe for standard transfer.",
+};
+
+// Streams the ~890K-row CSV once and keeps only the accounts we alias.
+async function loadMlScores() {
+  if (!fs.existsSync(ML_SCORES_CSV)) return null;
+  const wanted = new Set(Object.values(ML_MAP));
+  const found = {};
+  const rl = readline.createInterface({ input: fs.createReadStream(ML_SCORES_CSV), crlfDelay: Infinity });
+  let first = true;
+  for await (const line of rl) {
+    if (first) { first = false; continue; }
+    const [id, xgb, sage, risk] = line.split(",");
+    if (wanted.has(id)) found[id] = { xgb_score: Number(xgb), sage_score: Number(sage), risk_score: Number(risk) };
+    if (Object.keys(found).length === wanted.size) { rl.close(); break; }
+  }
+  return found;
+}
+
+function scoreDoc(account_id, vpa_address, s, ml_account_id) {
+  const level = s.risk_score >= FLAG ? "CRITICAL" : s.risk_score >= WARN ? "HIGH" : "LOW";
+  return {
+    account_id, vpa_address, ml_account_id,
+    risk_score: Number(s.risk_score.toFixed(4)), xgb_score: s.xgb_score, sage_score: s.sage_score,
+    risk_level: level, is_flagged: s.risk_score >= FLAG, warning_message: MSG[level],
+    model_version: "ml-service (blended XGB 0.3 + GraphSAGE 0.7)", updated_at: new Date(),
+  };
+}
+
+const LOADED_AT = Date.now();
+
+// mode "fresh"   - clean live-demo start: every account ACTIVE, no cases yet, the ring's
+//                  history looks like ordinary completed payments. Layer 1 already scores
+//                  the ring as risky, so freezing happens live when the agents decide.
+// mode "history" - pre-resolved incidents: rings already frozen, three finished cases.
+async function seedDatabase({ mode = "fresh", connect = true } = {}) {
+  if (connect && mongoose.connection.readyState === 0) await connectDB();
+
+  const shift = Date.now() - LOADED_AT; // keep the seeded timeline "recent" on every reset
+  const fresh = mode !== "history";
+
+  const accountDocs = [...accounts, ...decoyAccounts].map((a) => ({
+    ...a,
+    risk_status: fresh ? "ACTIVE" : a.risk_status || "ACTIVE",
+    ml_account_id: ML_MAP[a.account_id],
+  }));
+  const txnDocs = [...transactions, ...decoyTransactions].map((t) => ({
+    ...t,
+    timestamp: new Date(t.timestamp.getTime() + shift),
+    status: fresh ? "SUCCESS" : t.status,
+  }));
+  const caseDocs = fresh
+    ? []
+    : initialCases.map((c) => ({ ...c, created_at: new Date(c.created_at.getTime() + shift) }));
+  // Replace the hand-written scores with the real model output wherever the CSV is available.
+  const ml = await loadMlScores();
+  const vpaOf = Object.fromEntries(accountDocs.map((a) => [a.account_id, a.vpa_address]));
+  const handScores = Object.fromEntries(riskScores.map((r) => [r.account_id, r]));
+  const scoreDocs = accountDocs.map((a) => {
+    const real = ml && ML_MAP[a.account_id] && ml[ML_MAP[a.account_id]];
+    if (real) return scoreDoc(a.account_id, vpaOf[a.account_id], real, ML_MAP[a.account_id]);
+    const hand = handScores[a.account_id];
+    if (hand) return { ...hand, ml_account_id: ML_MAP[a.account_id], updated_at: new Date() };
+    return scoreDoc(a.account_id, vpaOf[a.account_id], { risk_score: 0.05, xgb_score: 0, sage_score: 0 }, ML_MAP[a.account_id]);
+  });
 
   await Account.deleteMany({});
   await RiskScore.deleteMany({});
@@ -668,26 +793,33 @@ async function seed() {
   await InvestigationCase.deleteMany({});
   await AuditAction.deleteMany({});
 
-  await Account.insertMany(accounts);
-  await RiskScore.insertMany(riskScores);
-  await Transaction.insertMany(transactions);
-  await InvestigationCase.insertMany(initialCases);
+  await Account.insertMany(accountDocs);
+  await RiskScore.insertMany(scoreDocs);
+  await Transaction.insertMany(txnDocs);
+  if (caseDocs.length) await InvestigationCase.insertMany(caseDocs);
 
-  console.log(`[seed] Successfully loaded rich SOC graph network!`);
-  console.log(`[seed] ${accounts.length} Accounts inserted`);
-  console.log(`[seed] ${riskScores.length} Risk Scores inserted`);
-  console.log(`[seed] ${transactions.length} Transactions inserted`);
-  console.log(`[seed] ${initialCases.length} Detailed Investigation Cases inserted`);
-  console.log("\n[seed] Pre-configured Demo VPAs:");
-  console.log("  1. mule.relay99@oksbi          -> CRITICAL Risk (0.96) - Auto Block Mule Relay");
-  console.log("  2. quicksplit.hub@paytm        -> CRITICAL Risk (0.92) - Auto Block Smurfing Hub");
-  console.log("  3. rajesh.kumar77@icici        -> HIGH Risk (0.88) - Credential Takeover Escalate");
-  console.log("  4. sharma.kirana.store@hdfcbank -> LOW Risk (0.04) - Benign Verified Merchant Clear");
-
-  await mongoose.disconnect();
+  return { mode: fresh ? "fresh" : "history", scores: ml ? "real ML model output" : "hand-written (blended_scores.csv not found)", accounts: accountDocs.length, risk_scores: scoreDocs.length, transactions: txnDocs.length, cases: caseDocs.length };
 }
 
-seed().catch((err) => {
-  console.error("[seed] failed:", err);
-  process.exit(1);
-});
+module.exports = { seedDatabase };
+
+// CLI: `npm run seed` (fresh) or `npm run seed -- history`
+if (require.main === module) {
+  const mode = process.argv[2] === "history" ? "history" : "fresh";
+  seedDatabase({ mode })
+    .then(async (r) => {
+      console.log(`[seed] Loaded SOC graph network in "${r.mode}" mode`);
+      console.log(`[seed] risk scores: ${r.scores}`);
+      console.log(`[seed] ${r.accounts} accounts, ${r.risk_scores} risk scores, ${r.transactions} transactions, ${r.cases} cases`);
+      console.log("\n[seed] Pre-configured Demo VPAs:");
+      console.log("  1. mule.relay99@oksbi           -> CRITICAL (0.96) mule relay, expect auto_block");
+      console.log("  2. quicksplit.hub@paytm         -> CRITICAL (0.92) smurfing hub, expect auto_block");
+      console.log("  3. rajesh.kumar77@icici         -> HIGH     (0.88) account takeover, expect escalate");
+      console.log("  4. sharma.kirana.store@hdfcbank -> LOW      (0.04) verified merchant, expect clear");
+      await mongoose.disconnect();
+    })
+    .catch((err) => {
+      console.error("[seed] failed:", err);
+      process.exit(1);
+    });
+}
