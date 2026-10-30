@@ -334,7 +334,7 @@ dossier in the Investigation tab.
   - False alarms cleared, cases investigated (blocked / escalated / cleared), money stopped.
   - **Model evaluation table** read from `ml-service/results/ensemble/final_table.csv`:
     AUC, PR-AUC, precision/recall at the 0.85 threshold, ring-catch rate per model.
-    The key finding: even the best blended model has only about **44 to 46% precision** at the
+    The key finding: the deployed blend (0.3·XGB + 0.7·SAGE) has only about **44% precision (43.6%)** at the
     0.85 threshold (many flags are false alarms) while catching ~148 to 150 of 150 fraud rings.
     That precision gap is *why a second layer exists*.
   - Live verdict mix (donut chart, recharts) and risk-level distribution bars.
@@ -401,7 +401,7 @@ state object: graph nodes/links, events, investigations, cases, stats, health.
    for precision.
 5. **Run *Account Takeover*.** Show **escalate**: the AI knows its limits. Click **Confirm
    block** or **Override** as the human analyst.
-6. **Open Intelligence.** Show the model table and the 44 to 46% precision point: "this is why
+6. **Open Intelligence.** Show the model table and the 44% precision point: "this is why
    the second layer exists", plus the decision-time vs the 25-minute human baseline.
 7. **Optional:** turn on *Live traffic* + *Fraud on* and let detections appear on their own.
 8. **Switch to the phone app** and make a payment to a mule VPA to show the customer-side hold
@@ -421,7 +421,7 @@ real model-scored accounts via `ml_account_id`. Money movement is simulated; no 
 involved and freeze/block actions are simulated in this prototype.
 
 **Q: Why do you need agents if you already have ML?**
-Because ML precision at the 0.85 threshold is only ~44 to 46%: more than half the flags are
+Because ML precision at the 0.85 threshold is only ~44%: more than half the flags are
 honest users. The agents combine the two models' disagreement with account context (tenure,
 KYC, neighbours) the way an analyst would, and clear the false alarms, in seconds not 25 minutes.
 
@@ -478,3 +478,63 @@ on `DEMO_MODE`. These are listed as production TODOs, not claimed as done.
 - **SOC**: Security Operations Center.
 - **LangGraph**: framework used to wire the four agents into a pipeline.
 - **Ollama**: runs the local LLM; no cloud API or data leaves the machine.
+
+---
+
+## Part 13: Where the data and scores come from (train / validation / test)
+
+**Short answer:** every XGBoost, GraphSAGE and blended score on the dashboard is a *held-out
+(out-of-fold) test prediction*, not a training-set score. But the 21 accounts on the dashboard
+are hand-written demo accounts that *borrow* a real dataset account's scores. Details:
+
+### 13.1 The dataset
+- Built by `ml-service/generate_dataset_v2.py` from the public **PaySim** simulated mobile-money
+  log (a 500,000-account sample of "normal" activity) **plus synthetic fraud injected by the
+  team**: 150 mule rings (40 chain, 35 star, 25 cycle, 25 fan-out, 25 hybrid) and 175
+  look-alike **decoys** (merchant hubs, payroll fan-outs, forward chains, family groups).
+  Total 893,216 accounts. So it is **synthetic, not real bank data**.
+- Labels (`label_mule`) are known by construction because the team created the rings.
+
+### 13.2 How it was split
+- Accounts are split **by group**, not individually (all accounts of one ring or decoy go to the
+  same side), into train/test and into **5 folds**, so a model never sees part of a ring in
+  training and the rest in testing (this prevents leakage).
+- For each fold: train on the other 4 folds; carve a **validation** set (~10% of training groups)
+  used for early stopping, calibration and blend-weight selection; then predict the held-out
+  fold = **test**.
+- Pooling the 5 held-out folds gives one score per account for all 893,216 accounts. These are
+  **out-of-fold (OOF)** predictions. `build_blended_scores.py` joins the XGBoost OOF scores and
+  the GraphSAGE (edge-aware, 2-layer) OOF scores and computes `risk_score = 0.3·xgb + 0.7·sage`
+  into `artifacts/blended_scores.csv`. Every account's score therefore comes from a model that
+  did **not** train on that account.
+
+### 13.3 So which set do dashboard scores come from?
+| Item on the dashboard | Source | Train / val / test? |
+|---|---|---|
+| XGB, GraphSAGE, blended score of a demo account | Looked up in `blended_scores.csv` via `ml_account_id` | **Test (out-of-fold)** prediction of the mapped dataset account |
+| Model table in Intelligence (AUC, precision...) | `results/ensemble/final_table.csv` | Pooled **5-fold cross-validation (held-out)** metrics |
+| Agent **suspicion score (0 to 100)** | Produced by the agent: LLM judgment, or fixed heuristic values (e.g. 95 / 72 / 15 / 10) if the LLM is off | **Not a trained model**; no train/test concept |
+| Verdict (auto_block / escalate / clear) | Agent rules + LLM, fed the scores above and the live graph | Not trained |
+| Graph nodes, edges, balances, KYC, device, IP | **Hand-written** `backend/seed.js` (21 accounts, 23 transactions) | Not from the dataset |
+
+### 13.4 Be upfront about these caveats
+1. **The accounts shown are not dataset accounts.** The demo uses 21 hand-built accounts. Each
+   has an `ml_account_id` pointing to a real dataset account of the same kind (e.g. mule relay →
+   `acc_chain_016_4`, scores 0.99999; payroll decoy → `acc_employee_075_9`, scores 0.91). The
+   scores are genuine model output; the **graph shape, profiles and names are ours**.
+2. **The four "false-alarm" accounts were chosen on purpose** as dataset decoys that the model
+   does flag, to demonstrate Layer 3 clearing them. They are real examples of the model's
+   false alarms, but not typical: only a minority of decoys are flagged (the evaluation table
+   shows roughly 4 to 24 false alarms per 175 decoys, depending on model).
+3. **I could not check which fold or split each mapped account sits in**, because `splits.csv`
+   and `oof` files are not in the repo (they are large or ignored). By construction all are
+   held-out predictions, but ask the ML teammate to confirm the fold of the ~16 mapped IDs.
+4. **It is cross-validation, not a final untouched test set.** Blend weight and the 0.85
+   threshold were chosen within this setup, so the metrics are somewhat optimistic.
+5. **Synthetic data is easier than real data.** AUC 0.99 is on rings generated by one script
+   and found by a model trained on that same generator's patterns. Real-world performance would
+   be lower; frame it as a proof of architecture, not a deployable accuracy claim.
+6. The agent's `csv` data mode reads the same `blended_scores.csv`; its account profiles
+   (`data/v2/accounts.csv`) are not in the repo, so for live investigations the backend sends
+   the demo profile and neighbours directly (`account_data`), and the scores come from the
+   same file.
