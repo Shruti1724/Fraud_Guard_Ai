@@ -7,7 +7,8 @@ cd ml-service && python -m uvicorn app:app --port 8080
 
 # 2. Agent service (Layer 3)   Python 3.11, Ollama running (ollama run llama3.2)
 cd agent-service
-ACTION_BACKEND=simulated DATA_PROVIDER_MODE=csv python run_service.py     # :8001
+# one-time: py -3.11 -m venv .venv ; .venv\Scripts\python -m pip install -r requirements.txt pandas
+ACTION_BACKEND=simulated DATA_PROVIDER_MODE=csv .venv/Scripts/python run_service.py     # :8001
 
 # 3. Backend
 cd backend && npm install && cp .env.example .env   # set MONGODB_URI
